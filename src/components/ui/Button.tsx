@@ -24,8 +24,8 @@ export default function Button({
     outline: 'border-2 border-primary text-primary hover:bg-primary/10'
   };
 
-  const Component = href ? 'a' : 'button';
-  
+  const Component = href ? 'a' : 'button' as any;
+
   return (
     <Component 
       className={`${baseStyles} ${variants[variant]} ${widthStyles} ${className}`}
