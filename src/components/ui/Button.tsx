@@ -19,8 +19,8 @@ export default function Button({
   const widthStyles = fullWidth ? 'w-full' : '';
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary-dark shadow-sm hover:shadow-md',
-    secondary: 'bg-secondary text-foreground hover:bg-secondary-dark shadow-sm hover:shadow-md',
+    primary: 'bg-primary text-white hover:bg-sky-500 hover:text-white shadow-sm hover:shadow-md',
+    secondary: 'bg-primary text-white hover:bg-sky-500 hover:text-white shadow-sm hover:shadow-md',
     outline: 'border-2 border-primary text-primary hover:bg-primary/10'
   };
 
