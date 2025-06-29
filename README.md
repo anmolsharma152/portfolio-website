@@ -1,6 +1,6 @@
 # Anmol Sharma - Portfolio Website
 
-A modern, interactive portfolio website showcasing advanced frontend development skills with sophisticated animations, responsive design, and excellent user experience.
+A modern, interactive portfolio website showcasing advanced frontend development skills with sophisticated animations, responsive design, and excellent user experience. Features dynamic typewriter effects, live GitHub integration, and interactive particle backgrounds.
 
 ## 🚀 Features
 
@@ -8,10 +8,13 @@ A modern, interactive portfolio website showcasing advanced frontend development
 - **Advanced Animations**: Framer Motion + GSAP
 - **Interactive Background**: Canvas-based particle system
 - **Dark/Light Theme**: Dynamic theme switching with localStorage persistence
-- **Typewriter Effect**: Dynamic text animation in hero section
+- **Dynamic Typewriter Effect**: Cycles through multiple professional titles
+- **Live GitHub Integration**: Real-time repository data and contributions
+- **Interactive Resume**: Tabbed timeline with downloadable PDF
 - **Magnetic Buttons**: Interactive hover effects
 - **Responsive Design**: Mobile-first approach
 - **Performance Optimized**: 60fps animations and optimized builds
+- **Smooth Scrolling**: Seamless navigation between sections
 
 ## 🛠️ Tech Stack
 
@@ -21,12 +24,42 @@ A modern, interactive portfolio website showcasing advanced frontend development
 - **Icons**: Lucide React 0.263.1
 - **Language**: TypeScript
 - **Build Tool**: Vite
+- **API Integration**: GitHub REST API
+
+## ✨ Key Components
+
+### 🎯 Hero Section
+- **Dynamic Typewriter**: Cycles through 6 professional titles:
+  - Data Scientist
+  - AI Specialist
+  - ML Engineer
+  - Web Developer
+  - Software Engineer
+  - Data Analyst
+- **Smooth Animations**: Staggered entrance effects
+- **Interactive Buttons**: Magnetic hover effects with smooth scrolling
+
+### 🌟 Interactive Background
+- **Particle System**: Canvas-based floating particles
+- **Mouse Interaction**: Particles respond to cursor movement
+- **Performance Optimized**: 60fps animations
+
+### 📊 GitHub Integration
+- **Live Repository Data**: Fetches real-time GitHub data
+- **Contribution Graph**: Displays coding activity
+- **Repository Stats**: Stars, forks, languages, and descriptions
+- **Error Handling**: Graceful fallbacks for API failures
+
+### 📄 Interactive Resume
+- **Tabbed Interface**: Timeline-based experience display
+- **Downloadable PDF**: Professional resume export
+- **Smooth Transitions**: Animated tab switching
 
 ## 📦 Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/anmolsharma152/portfolio-website.git
    cd portfolio-website
    ```
 
@@ -50,14 +83,16 @@ A modern, interactive portfolio website showcasing advanced frontend development
 ```
 src/
 ├── components/          # React components
-│   ├── About.tsx       # About section
-│   ├── Contact.tsx     # Contact form and info
-│   ├── Hero.tsx        # Hero section with typewriter
+│   ├── About.tsx       # About section with animations
+│   ├── Contact.tsx     # Contact form and social links
+│   ├── GitHubStats.tsx # Live GitHub data integration
+│   ├── Hero.tsx        # Hero section with typewriter effect
 │   ├── LoadingScreen.tsx # Loading animation
 │   ├── Navigation.tsx  # Navigation with theme toggle
 │   ├── ParticleBackground.tsx # Canvas particle system
-│   ├── Projects.tsx    # Projects showcase
-│   └── Skills.tsx      # Skills section
+│   ├── Projects.tsx    # Projects showcase with GitHub API
+│   ├── Resume.tsx      # Interactive resume component
+│   └── Skills.tsx      # Skills section with progress bars
 ├── hooks/              # Custom React hooks
 │   └── useGSAPAnimations.ts # GSAP animation management
 ├── types/              # TypeScript type definitions
@@ -73,30 +108,39 @@ src/
 
 ### Personal Information
 Update the following files with your information:
-- `src/components/Hero.tsx` - Name and title
+- `src/components/Hero.tsx` - Name and professional titles
 - `src/components/About.tsx` - Personal description
-- `src/components/Contact.tsx` - Contact details
-- `src/components/Projects.tsx` - Project links
-- `src/components/Skills.tsx` - Skills and expertise
+- `src/components/Contact.tsx` - Contact details and social links
+- `src/components/Projects.tsx` - GitHub username for API integration
+- `src/components/Skills.tsx` - Skills and expertise levels
+- `src/components/Resume.tsx` - Experience timeline and education
+
+### GitHub Integration
+- Update GitHub username in `src/components/GitHubStats.tsx`
+- Configure GitHub API endpoints if needed
+- Customize repository display preferences
 
 ### Styling
 - Colors and theme: `src/index.css`
 - Tailwind config: `tailwind.config.js`
+- Particle settings: `src/components/ParticleBackground.tsx`
 
 ### Animations
 - Framer Motion variants: `src/utils/animations.ts`
 - GSAP animations: `src/hooks/useGSAPAnimations.ts`
+- Typewriter timing: `src/components/Hero.tsx`
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
 1. Push your code to GitHub
 2. Connect your repository to Vercel
-3. Deploy automatically
+3. Deploy automatically with preview deployments
 
 ### Netlify
 1. Build the project: `npm run build`
 2. Upload the `dist` folder to Netlify
+3. Configure build settings if needed
 
 ### GitHub Pages
 1. Add `"homepage": "https://yourusername.github.io/repo-name"` to package.json
@@ -111,24 +155,53 @@ The website is fully responsive with breakpoints:
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
 
+All components adapt seamlessly across devices with optimized touch interactions.
+
 ## 🎯 Performance
 
-- Optimized animations for 60fps
-- Lazy loading ready
-- Tree shaking enabled
-- Minimal bundle size
+- **Optimized Animations**: 60fps performance with hardware acceleration
+- **Lazy Loading**: Ready for component-level code splitting
+- **Tree Shaking**: Unused code elimination
+- **Minimal Bundle**: Optimized build size
+- **API Caching**: GitHub data caching for better performance
+
+## 🔧 Development
+
+### Available Scripts
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+### Environment Variables
+Create a `.env` file for any API keys or configuration:
+```env
+VITE_GITHUB_USERNAME=your-github-username
+VITE_GITHUB_TOKEN=your-github-token (optional)
+```
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Make your changes
-4. Submit a pull request
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
+## 🙏 Acknowledgments
+
+- Framer Motion for smooth animations
+- GSAP for advanced animation capabilities
+- Tailwind CSS for utility-first styling
+- GitHub API for live data integration
+- Vite for fast development experience
+
 ---
 
 Built with ❤️ by Anmol Sharma
+
+*Last updated: December 2024*
