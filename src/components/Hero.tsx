@@ -16,9 +16,9 @@ const Hero = () => {
     "Data Analyst"
   ]
 
-  const typingSpeed = 100
-  const deletingSpeed = 50
-  const pauseTime = 2000 // Time to pause when full text is shown
+  const typingSpeed = 50
+  const deletingSpeed = 25
+  const pauseTime = 1000 // Time to pause when full text is shown
 
   useEffect(() => {
     const currentTitle = titles[currentTitleIndex]
@@ -154,29 +154,29 @@ const Hero = () => {
       <motion.div 
         className="absolute top-20 left-10 w-4 h-4 bg-blue-500 rounded-full opacity-20"
         animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
         className="absolute top-40 right-20 w-6 h-6 bg-purple-500 rounded-full opacity-20"
         animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       />
       <motion.div 
         className="absolute bottom-40 left-20 w-3 h-3 bg-cyan-500 rounded-full opacity-20"
         animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
       
       {/* Additional floating elements */}
       <motion.div 
         className="absolute top-1/3 right-1/4 w-2 h-2 bg-pink-500 rounded-full opacity-30"
         animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
       />
       <motion.div 
         className="absolute bottom-1/3 right-1/3 w-5 h-5 bg-yellow-500 rounded-full opacity-20"
         animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.75 }}
       />
     </section>
   )

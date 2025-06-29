@@ -156,7 +156,7 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.3 }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
         >
           {repos.map((repo, index) => (
@@ -164,7 +164,7 @@ const Projects = () => {
               key={repo.id}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+              transition={{ delay: 0.2 + index * 0.05, duration: 0.2 }}
               whileHover={{ y: -10 }}
               className="group relative"
             >
@@ -273,7 +273,7 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.3 }}
           className="text-center"
         >
           <motion.a
@@ -282,7 +282,7 @@ const Projects = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg transition-all duration-150"
           >
             <Github size={20} />
             View All Projects on GitHub

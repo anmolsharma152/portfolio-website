@@ -3,7 +3,7 @@ export const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.05
     }
   }
 }
@@ -14,7 +14,7 @@ export const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5
+      duration: 0.25
     }
   }
 }
@@ -25,7 +25,7 @@ export const fadeInUp = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.3,
       ease: 'easeOut'
     }
   }
@@ -37,7 +37,7 @@ export const fadeInLeft = {
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.3,
       ease: 'easeOut'
     }
   }
@@ -49,7 +49,7 @@ export const fadeInRight = {
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.3,
       ease: 'easeOut'
     }
   }
@@ -61,7 +61,7 @@ export const scaleIn = {
     scale: 1,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.25,
       ease: 'easeOut'
     }
   }
@@ -72,7 +72,7 @@ export const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.05
     }
   }
 } 

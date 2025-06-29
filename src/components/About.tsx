@@ -19,8 +19,8 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.05
       }
     }
   }
@@ -31,7 +31,7 @@ const About = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.4,
         ease: "easeOut"
       }
     }
@@ -43,8 +43,8 @@ const About = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.6,
-        delay: index * 0.1,
+        duration: 0.3,
+        delay: index * 0.05,
         ease: "easeOut"
       }
     })
@@ -56,7 +56,7 @@ const About = () => {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 1,
+        duration: 0.5,
         ease: "easeOut"
       }
     }
@@ -145,7 +145,7 @@ const About = () => {
                     className="text-2xl font-bold gradient-text"
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
-                    transition={{ delay: 0.5 + index * 0.1, type: "spring", stiffness: 200 }}
+                    transition={{ delay: 0.3 + index * 0.05, duration: 0.25 }}
                   >
                     {stat.value}
                   </motion.div>

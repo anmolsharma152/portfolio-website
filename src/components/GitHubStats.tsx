@@ -217,7 +217,7 @@ const GitHubStats = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.8 }}
+          transition={{ delay: 0.1, duration: 0.3 }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
         >
           {[
@@ -232,14 +232,14 @@ const GitHubStats = () => {
               key={stat.label}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+              transition={{ delay: 0.2 + index * 0.05, duration: 0.2 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="glass p-6 rounded-lg text-center hover:shadow-lg transition-all duration-300"
+              className="glass p-6 rounded-lg text-center hover:shadow-lg transition-all duration-150"
             >
               <motion.div
                 className={`w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center`}
                 whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.3 }}
               >
                 <stat.icon className="w-6 h-6 text-white" />
               </motion.div>
@@ -247,7 +247,7 @@ const GitHubStats = () => {
                 className="text-3xl font-bold gradient-text mb-2"
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
-                transition={{ delay: 0.6 + index * 0.1, type: "spring", stiffness: 200 }}
+                transition={{ delay: 0.3 + index * 0.05, type: "spring", stiffness: 200 }}
               >
                 {stat.value.toLocaleString()}
               </motion.div>
@@ -260,7 +260,7 @@ const GitHubStats = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.3 }}
           className="glass p-8 rounded-lg mb-12"
         >
           <h3 className="text-2xl font-bold mb-6 text-center">Top Programming Languages</h3>
@@ -270,9 +270,9 @@ const GitHubStats = () => {
                 key={language}
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 1 + index * 0.1, duration: 0.6 }}
+                transition={{ delay: 0.4 + index * 0.05, duration: 0.2 }}
                 whileHover={{ x: 10 }}
-                className="flex items-center justify-between p-4 rounded-lg hover:bg-opacity-20 transition-all duration-300"
+                className="flex items-center justify-between p-4 rounded-lg hover:bg-opacity-20 transition-all duration-150"
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-4 h-4 rounded-full ${getLanguageColor(language)}`}></div>
@@ -288,7 +288,7 @@ const GitHubStats = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          transition={{ delay: 0.5, duration: 0.3 }}
           className="glass p-8 rounded-lg"
         >
           <h3 className="text-2xl font-bold mb-6 text-center">Recent Activity</h3>
@@ -298,9 +298,9 @@ const GitHubStats = () => {
                 key={index}
                 initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 1.4 + index * 0.1, duration: 0.6 }}
+                transition={{ delay: 0.6 + index * 0.05, duration: 0.2 }}
                 whileHover={{ x: 10 }}
-                className="flex items-center space-x-4 p-4 rounded-lg hover:bg-opacity-20 transition-all duration-300"
+                className="flex items-center space-x-4 p-4 rounded-lg hover:bg-opacity-20 transition-all duration-150"
               >
                 <div className="w-3 h-3 bg-primary rounded-full"></div>
                 <div className="flex-1">
@@ -315,7 +315,7 @@ const GitHubStats = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.8, duration: 0.8 }}
+            transition={{ delay: 0.8, duration: 0.3 }}
             className="text-center mt-8"
           >
             <a

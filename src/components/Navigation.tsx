@@ -41,7 +41,8 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      transition={{ duration: 0.3 }}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-150 ${
         scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
       }`}
     >
@@ -65,7 +66,7 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
                 key={item.name}
                 whileHover={{ y: -2 }}
                 onClick={() => scrollToSection(item.href)}
-                className="text-foreground hover:text-primary transition-colors duration-200"
+                className="text-foreground hover:text-primary transition-colors duration-100"
               >
                 {item.name}
               </motion.button>
@@ -79,7 +80,7 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleTheme}
-              className="p-2 rounded-full glass hover:bg-opacity-20 transition-all duration-200"
+              className="p-2 rounded-full glass hover:bg-opacity-20 transition-all duration-100"
             >
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </motion.button>
@@ -87,7 +88,7 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-full glass hover:bg-opacity-20 transition-all duration-200"
+              className="md:hidden p-2 rounded-full glass hover:bg-opacity-20 transition-all duration-100"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -101,6 +102,7 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
               className="md:hidden glass rounded-lg mt-2 overflow-hidden"
             >
               <div className="px-4 py-2 space-y-2">
@@ -108,7 +110,7 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left py-2 px-3 rounded-md hover:bg-opacity-20 transition-colors duration-200"
+                    className="block w-full text-left py-2 px-3 rounded-md hover:bg-opacity-20 transition-colors duration-100"
                   >
                     {item.name}
                   </button>

@@ -11,18 +11,18 @@ export const useGSAPAnimations = () => {
   useEffect(() => {
     // Hero section animations
     gsap.from('.hero-title', {
-      duration: 1,
-      y: 100,
+      duration: 0.5,
+      y: 60,
       opacity: 0,
-      ease: 'power3.out'
+      ease: 'power2.out'
     })
 
     gsap.from('.hero-subtitle', {
-      duration: 1,
-      y: 50,
+      duration: 0.5,
+      y: 30,
       opacity: 0,
-      delay: 0.3,
-      ease: 'power3.out'
+      delay: 0.15,
+      ease: 'power2.out'
     })
 
     // Section animations
@@ -30,11 +30,11 @@ export const useGSAPAnimations = () => {
       start: 'top 80%',
       onEnter: (elements) => {
         gsap.from(elements, {
-          duration: 0.8,
-          y: 50,
+          duration: 0.4,
+          y: 30,
           opacity: 0,
-          stagger: 0.2,
-          ease: 'power3.out'
+          stagger: 0.1,
+          ease: 'power2.out'
         })
       }
     })
@@ -44,10 +44,10 @@ export const useGSAPAnimations = () => {
       start: 'top 80%',
       onEnter: (elements) => {
         gsap.from(elements, {
-          duration: 1,
+          duration: 0.5,
           width: 0,
-          ease: 'power2.out',
-          stagger: 0.1
+          ease: 'power1.out',
+          stagger: 0.05
         })
       }
     })
@@ -57,11 +57,11 @@ export const useGSAPAnimations = () => {
       start: 'top 85%',
       onEnter: (elements) => {
         gsap.from(elements, {
-          duration: 0.6,
-          y: 30,
+          duration: 0.3,
+          y: 15,
           opacity: 0,
-          stagger: 0.1,
-          ease: 'power2.out'
+          stagger: 0.05,
+          ease: 'power1.out'
         })
       }
     })
