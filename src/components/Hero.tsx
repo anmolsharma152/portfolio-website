@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
@@ -86,15 +88,15 @@ const Hero = () => {
           </motion.h1>
 
           <motion.div 
-            className="text-xl md:text-2xl text-muted mb-8 h-8"
+            className="text-xl md:text-2xl mb-8 h-8 font-medium"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <span className="inline-block">
+            <span className="gradient-text">
               {text}
               <motion.span 
-                className={`inline-block w-0.5 h-6 ml-1 bg-primary ${isTyping ? 'animate-pulse' : ''}`}
+                className={`inline-block w-0.5 h-6 ml-1 bg-gradient-to-b from-blue-500 to-purple-600 ${isTyping ? 'animate-pulse' : ''}`}
                 animate={{ opacity: isTyping ? 1 : 0.3 }}
                 transition={{ duration: 0.5 }}
               />
@@ -102,7 +104,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.p 
-            className="text-lg text-muted max-w-2xl mx-auto mb-12"
+            className="text-lg max-w-2xl mx-auto mb-12 text-muted"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
