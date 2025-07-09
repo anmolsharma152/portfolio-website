@@ -1,10 +1,12 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const Skills = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, threshold: 0.1 })
+  const isInView = useInView(ref, { once: true })
 
   const skillCategories = [
     {
@@ -124,7 +126,7 @@ const Skills = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {skillCategories.map((category, categoryIndex) => (
+          {skillCategories.map((category) => (
             <motion.div
               key={category.title}
               variants={categoryVariants}
@@ -236,4 +238,4 @@ const Skills = () => {
   )
 }
 
-export default Skills 
+export default Skills

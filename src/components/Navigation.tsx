@@ -1,13 +1,12 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X } from 'lucide-react'
+import { Sun, Moon, Menu, X, Github, Linkedin, Mail } from 'lucide-react'
+import { useTheme } from '@/context/ThemeContext'
 
-interface NavigationProps {
-  theme: 'light' | 'dark'
-  toggleTheme: () => void
-}
-
-const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
+const Navigation = () => {
+  const { theme, toggleTheme } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -24,9 +23,25 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Resume', href: '#resume' },
-    { name: 'GitHub', href: '#github-stats' },
     { name: 'Contact', href: '#contact' }
+  ]
+  
+  const socialLinks = [
+    { 
+      icon: <Github size={18} />, 
+      href: 'https://github.com/yourusername',
+      label: 'GitHub'
+    },
+    { 
+      icon: <Linkedin size={18} />, 
+      href: 'https://linkedin.com/in/yourusername',
+      label: 'LinkedIn'
+    },
+    { 
+      icon: <Mail size={18} />, 
+      href: 'mailto:your.email@example.com',
+      label: 'Email'
+    }
   ]
 
   const scrollToSection = (href: string) => {
@@ -39,59 +54,111 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-150 ${
-        scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-border/50' 
+          : 'bg-background/50 dark:bg-background/50 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+          <motion.a
+            href="#home"
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="flex items-center space-x-3 group"
           >
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">AS</span>
-            </div>
-            <span className="font-bold text-xl gradient-text">Anmol Sharma</span>
-          </motion.div>
+            <motion.div 
+              className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:shadow-blue-500/20 transition-all duration-300"
+              whileHover={{ rotate: 15, scale: 1.05 }}
+            >
+              <span className="text-white font-bold text-lg">AS</span>
+            </motion.div>
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
+              Anmol Sharma
+            </span>
+          </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item, index) => (
+              <motion.a
                 key={item.name}
-                whileHover={{ y: -2 }}
-                onClick={() => scrollToSection(item.href)}
-                className="text-foreground hover:text-primary transition-colors duration-100"
+                href={item.href}
+                initial={{ y: -10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 * index, duration: 0.3 }}
+                className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200 relative group"
               >
                 {item.name}
-              </motion.button>
+                <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-4/5 group-hover:left-[10%]" />
+              </motion.a>
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Right Side - Theme Toggle & Socials */}
+          <div className="flex items-center space-x-2">
+            {/* Social Icons - Desktop */}
+            <div className="hidden md:flex items-center space-x-1 mr-4">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ 
+                    delay: 0.5 + (index * 0.1),
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20
+                  }}
+                  className="p-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-foreground/5 transition-colors duration-200"
+                  aria-label={link.label}
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </div>
+
             {/* Theme Toggle */}
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
               onClick={toggleTheme}
-              className="p-2 rounded-full glass hover:bg-opacity-20 transition-all duration-100"
+              className="p-2 rounded-lg hover:bg-foreground/5 transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, type: 'spring', stiffness: 300, damping: 20 }}
             >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-yellow-300" />
+              ) : (
+                <Moon className="w-5 h-5 text-foreground/80" />
+              )}
             </motion.button>
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-full glass hover:bg-opacity-20 transition-all duration-100"
+              className="md:hidden p-2 rounded-lg hover:bg-foreground/5 transition-colors duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </motion.button>
           </div>
         </div>
 
@@ -99,22 +166,52 @@ const Navigation = ({ theme, toggleTheme }: NavigationProps) => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden glass rounded-lg mt-2 overflow-hidden"
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden overflow-hidden bg-background/80 dark:bg-background/90 backdrop-blur-lg border-t border-border/30 shadow-lg"
             >
-              <div className="px-4 py-2 space-y-2">
-                {navItems.map((item) => (
-                  <button
+              <div className="px-2 pt-2 pb-4 space-y-1">
+                {navItems.map((item, index) => (
+                  <motion.a
                     key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left py-2 px-3 rounded-md hover:bg-opacity-20 transition-colors duration-100"
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.05 * index, duration: 0.2 }}
+                    className="block px-4 py-3 text-base font-medium text-foreground/90 hover:text-primary hover:bg-foreground/5 rounded-lg transition-colors duration-200 flex items-center"
                   >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     {item.name}
-                  </button>
+                  </motion.a>
                 ))}
+                
+                {/* Social Icons - Mobile */}
+                <div className="pt-2 mt-4 border-t border-border/20">
+                  <div className="flex justify-center space-x-4 px-4">
+                    {socialLinks.map((link, index) => (
+                      <motion.a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ 
+                          delay: 0.2 + (index * 0.1),
+                          type: 'spring',
+                          stiffness: 300
+                        }}
+                        className="p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/70 hover:text-primary transition-colors duration-200"
+                        aria-label={link.label}
+                      >
+                        {link.icon}
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}

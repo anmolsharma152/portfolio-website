@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
@@ -5,7 +7,7 @@ import { User, Award, Briefcase, GraduationCap } from 'lucide-react'
 
 const About = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, threshold: 0.1 })
+  const isInView = useInView(ref, { once: true })
 
   const stats = [
     { icon: Briefcase, label: 'Years Experience', value: '3+' },

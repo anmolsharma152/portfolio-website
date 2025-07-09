@@ -1,18 +1,41 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react'
+'use client';
+
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Mail, Github, Linkedin, Send } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+
+const formSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
+  email: z.string().email({ message: 'Please enter a valid email address' }),
+  subject: z.string().min(5, { message: 'Subject must be at least 5 characters' }),
+  message: z.string().min(10, { message: 'Message must be at least 10 characters' }),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 const Contact = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, threshold: 0.1 })
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
 
   const contactInfo = [
     {
@@ -35,30 +58,32 @@ const Contact = () => {
     }
   ]
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    setIsSubmitting(false)
-    
-    // Show success message (you can implement a toast notification here)
-    alert('Thank you for your message! I\'ll get back to you soon.')
-  }
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
+      }
+
+      // Show success toast
+      toast.success('Message sent successfully! I\'ll get back to you soon.');
+      
+      // Reset form
+      reset();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+    }
+  };
 
   return (
     <section id="contact" className="py-20 relative z-10">
@@ -145,36 +170,41 @@ const Contact = () => {
             className="glass p-8 rounded-lg"
           >
             <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name *
+                    {errors.name && (
+                      <span className="ml-2 text-sm text-red-500">{errors.name.message}</span>
+                    )}
                   </label>
                   <input
-                    type="text"
                     id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                    {...register('name')}
+                    className={`w-full px-4 py-3 bg-background border ${
+                      errors.name ? 'border-red-500' : 'border-border'
+                    } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300`}
                     placeholder="Your name"
+                    disabled={isSubmitting}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Email *
+                    {errors.email && (
+                      <span className="ml-2 text-sm text-red-500">{errors.email.message}</span>
+                    )}
                   </label>
                   <input
-                    type="email"
                     id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                    type="email"
+                    {...register('email')}
+                    className={`w-full px-4 py-3 bg-background border ${
+                      errors.email ? 'border-red-500' : 'border-border'
+                    } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300`}
                     placeholder="your.email@example.com"
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -182,32 +212,37 @@ const Contact = () => {
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium mb-2">
                   Subject *
+                  {errors.subject && (
+                    <span className="ml-2 text-sm text-red-500">{errors.subject.message}</span>
+                  )}
                 </label>
                 <input
-                  type="text"
                   id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  {...register('subject')}
+                  className={`w-full px-4 py-3 bg-background border ${
+                    errors.subject ? 'border-red-500' : 'border-border'
+                  } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300`}
                   placeholder="What's this about?"
+                  disabled={isSubmitting}
                 />
               </div>
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
                   Message *
+                  {errors.message && (
+                    <span className="ml-2 text-sm text-red-500">{errors.message.message}</span>
+                  )}
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
                   rows={6}
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 resize-none"
+                  {...register('message')}
+                  className={`w-full px-4 py-3 bg-background border ${
+                    errors.message ? 'border-red-500' : 'border-border'
+                  } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 resize-none`}
                   placeholder="Tell me about your project or inquiry..."
+                  disabled={isSubmitting}
                 />
               </div>
               
