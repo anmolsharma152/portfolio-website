@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Portfolio Website"
+version: 1.0.0
+date-released: 2023-07-09
+authors:
+  - family-names: "Sharma"
+    given-names: "Anmol"
+    orcid: "https://orcid.org/your-orcid-id"
+    email: "your.email@example.com"
+    website: "https://yourwebsite.com"
+repository-code: "https://github.com/anmolsharma152/portfolio-website"
+url: "https://github.com/anmolsharma152/portfolio-website"
+keywords:
+  - "portfolio"
+  - "personal website"
+  - "nextjs"
+  - "react"
+  - "typescript"
+license: MIT
+abstract: "A modern, responsive, and customizable personal portfolio website built with Next.js, React, and TypeScript."

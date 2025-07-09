@@ -1,53 +1,57 @@
 # Anmol Sharma - Portfolio Website
 
-A modern, interactive portfolio website showcasing advanced frontend development skills with sophisticated animations, responsive design, and excellent user experience. Features dynamic typewriter effects, live GitHub integration, and interactive particle backgrounds.
+A modern, interactive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Showcasing projects, skills, and experience with a clean, responsive design and smooth animations.
 
 ## 🚀 Features
 
-- **Modern Tech Stack**: React 18 + Vite + TypeScript
-- **Advanced Animations**: Framer Motion + GSAP
-- **Interactive Background**: Canvas-based particle system
-- **Dark/Light Theme**: Dynamic theme switching with localStorage persistence
-- **Dynamic Typewriter Effect**: Cycles through multiple professional titles
-- **Live GitHub Integration**: Real-time repository data and contributions
-- **Interactive Resume**: Tabbed timeline with downloadable PDF
-- **Magnetic Buttons**: Interactive hover effects
-- **Responsive Design**: Mobile-first approach
-- **Performance Optimized**: 60fps animations and optimized builds
-- **Smooth Scrolling**: Seamless navigation between sections
+- **Modern Tech Stack**: Next.js 14 + TypeScript + Tailwind CSS
+- **Server Components**: Optimized performance with React Server Components
+- **Dark/Light Theme**: Built-in theme switching with `next-themes`
+- **Contact Form**: Functional contact form with email notifications
+- **Responsive Design**: Mobile-first, fully responsive layout
+- **Performance Optimized**: Fast page loads and smooth animations
+- **SEO Optimized**: Built-in Next.js SEO features
+- **Type Safety**: Full TypeScript support
+- **Form Validation**: Client and server-side validation with Zod
+- **Toast Notifications**: User feedback with `react-hot-toast`
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18.2.0 + Vite 4.4.5
-- **Styling**: Tailwind CSS 3.3.3
-- **Animations**: Framer Motion 10.16.4 + GSAP 3.12.2
-- **Icons**: Lucide React 0.263.1
-- **Language**: TypeScript
-- **Build Tool**: Vite
-- **API Integration**: GitHub REST API
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS 3.3.5
+- **Animations**: Framer Motion 10.16.4
+- **Icons**: Lucide React
+- **Form Handling**: React Hook Form + Zod
+- **Email**: Nodemailer
+- **UI Components**: Radix UI + Shadcn/ui
+- **Type Checking**: TypeScript 5.3.2
+- **Linting**: ESLint + Prettier
 
-## ✨ Key Components
+## ✨ Key Features
 
-### 🎯 Hero Section
-- **Dynamic Typewriter**: Cycles through 6 professional titles:
-  - Data Scientist
-  - AI Specialist
-  - ML Engineer
-  - Web Developer
-  - Software Engineer
-  - Data Analyst
-- **Smooth Animations**: Staggered entrance effects
-- **Interactive Buttons**: Magnetic hover effects with smooth scrolling
+### 🎯 Modern Architecture
+- **App Router**: Leveraging Next.js 14 App Router for better performance and SEO
+- **Server Actions**: Efficient data fetching and mutations
+- **Edge Runtime**: Optimized for global performance
+- **Image Optimization**: Built-in Next.js Image component
 
-### 🌟 Interactive Background
-- **Particle System**: Canvas-based floating particles
-- **Mouse Interaction**: Particles respond to cursor movement
-- **Performance Optimized**: 60fps animations
+### 📝 Contact Form
+- **Client/Server Validation**: Using React Hook Form and Zod
+- **Email Notifications**: Nodemailer integration for form submissions
+- **Loading States**: Clear user feedback during form submission
+- **Error Handling**: Comprehensive error messages and validation
 
-### 📊 GitHub Integration
-- **Live Repository Data**: Fetches real-time GitHub data
-- **Contribution Graph**: Displays coding activity
-- **Repository Stats**: Stars, forks, languages, and descriptions
+### 🎨 Styling & Theming
+- **Tailwind CSS**: Utility-first CSS framework
+- **CSS Variables**: For consistent theming
+- **Dark Mode**: Toggle between light and dark themes
+- **Responsive Design**: Works on all device sizes
+
+### 🛠 Development Experience
+- **TypeScript**: Type-safe codebase
+- **ESLint + Prettier**: Code quality and formatting
+- **Husky**: Git hooks for consistent commits
+- **Lint Staged**: Run linters on git staged files
 - **Error Handling**: Graceful fallbacks for API failures
 
 ### 📄 Interactive Resume
@@ -65,6 +69,95 @@ As an AI Specialist, this portfolio showcases advanced AI/ML capabilities:
 - **Data Science & ML Model Demos:** Try out interactive ML models (e.g., image classifier, sentiment analysis) with visualizations and explainability.
 - **AI/ML Project Gallery:** Browse my top data science and ML projects, including descriptions, tech stack, links, and visual results.
 - **Technical Blog/Articles:** Read posts about LLMs, RAG, agentic systems, and ML best practices.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.17.0 or later
+- npm (v9+), yarn, or pnpm
+- Git
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/anmolsharma152/portfolio-website.git
+   cd portfolio-website
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory:
+   ```
+   # SMTP Configuration (for contact form)
+   SMTP_HOST=smtp.example.com
+   SMTP_PORT=587
+   SMTP_USER=your-email@example.com
+   SMTP_PASS=your-email-password
+   SMTP_FROM=Portfolio Contact <noreply@example.com>
+   SMTP_TO=your-email@example.com
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## 🏗 Project Structure
+
+```
+.
+├── app/                    # App Router
+│   ├── api/                # API routes
+│   │   └── contact/        # Contact form API route
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Home page
+├── components/             # Reusable components
+│   ├── ui/                 # Shadcn/ui components
+│   ├── Contact.tsx         # Contact form component
+│   └── ToastProvider.tsx   # Toast notifications
+├── lib/                    # Utility functions
+├── public/                 # Static assets
+└── styles/                 # Global styles and themes
+```
+
+## 🛠 Development
+
+### Linting
+```bash
+npm run lint
+```
+
+### Formatting
+```bash
+npm run format
+```
+
+### Building for Production
+```bash
+npm run build
+```
+
+### Running Production Build
+```bash
+npm start
+```
 
 ## 📦 Installation
 
