@@ -19,8 +19,29 @@ const Navigation = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const handleInitialScroll = () => {
+      if (window.location.hash) {
+        // Wait for all components to be mounted
+        setTimeout(() => {
+          scrollToSection(window.location.hash);
+        }, 500);
+      }
+    };
+
+    // Initial scroll check
+    const timer = setTimeout(handleInitialScroll, 300);
+
+    // Add event listeners
+    window.addEventListener('load', handleInitialScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Cleanup function
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('load', handleInitialScroll);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const navItems = [
@@ -51,18 +72,35 @@ const Navigation = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 80; // Approximate navigation height
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navHeight;
+    // Remove the # from the href to get the ID
+    const id = href.replace('#', '');
+    if (!id) return;
 
+    // Close mobile menu if open
+    setIsMenuOpen(false);
+
+    // Small delay to ensure state updates before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (!element) {
+        console.error(`Element with id '${id}' not found`);
+        return;
+      }
+
+      // Calculate the correct scroll position
+      const headerOffset = 80; // Height of your header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      // Scroll to the element
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
       });
-      setIsMenuOpen(false);
-    }
+
+      // Update URL without adding to history
+      window.history.pushState({}, '', href);
+    }, 50); // Small delay to ensure state updates
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

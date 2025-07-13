@@ -7,6 +7,7 @@ import './globals.css';
 import Navigation from '@/components/Navigation';
 import { Toaster } from '@/components/ui/Toaster';
 import { ThemeProvider } from '@/context/ThemeContext';
+import ThemeWrapper from '@/components/ThemeWrapper';
 
 // Load Inter font with specific subsets
 const inter = Inter({
@@ -49,14 +50,17 @@ export const metadata: Metadata = {
   },
 };
 
+// Apply the font variable to the HTML element
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider>
-          <Navigation />
-          <main className="flex-1">{children}</main>
-          <Toaster />
+          <ThemeWrapper>
+            <Navigation />
+            <main className="flex-1">{children}</main>
+            <Toaster />
+          </ThemeWrapper>
         </ThemeProvider>
       </body>
     </html>
