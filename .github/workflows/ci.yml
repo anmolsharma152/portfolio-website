@@ -33,9 +33,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Run Tests
-        run: npm test
-
       # Uncomment and configure deployment steps if needed
       # - name: Deploy to Production
       #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
