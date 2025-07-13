@@ -1,13 +1,9 @@
-'use client';
-
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { Toaster } from '@/components/ui/Toaster';
 import Navigation from '@/components/Navigation';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import './globals.css';
+import type { Metadata } from 'next';
 
 // Load Inter font with specific subsets
 const inter = Inter({
@@ -16,46 +12,54 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [mounted, setMounted] = useState(false);
+export const metadata: Metadata = {
+  title: 'Anmol Sharma | Portfolio',
+  description: 'Portfolio of Anmol Sharma, Data Scientist and Machine Learning Engineer',
+  viewport: 'width=device-width, initial-scale=1.0',
+  themeColor: '#3b82f6',
+  manifest: '/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#3b82f6' },
+    ],
+  },
+  other: {
+    'msapplication-TileColor': '#3b82f6',
+    'msapplication-config': '/browserconfig.xml',
+  },
+  metadataBase: new URL('https://anmolsharma.tech'),
+  openGraph: {
+    title: 'Anmol Sharma | Portfolio',
+    description: 'Portfolio of Anmol Sharma, Data Scientist and Machine Learning Engineer',
+    url: 'https://anmolsharma.tech',
+    siteName: 'Anmol Sharma',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Anmol Sharma | Portfolio',
+    description: 'Portfolio of Anmol Sharma, Data Scientist and Machine Learning Engineer',
+  },
+};
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <html lang="en" suppressHydrationWarning>
-        <body className="flex items-center justify-center min-h-screen bg-background">
-          <div className="w-12 h-12 border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
-        </body>
-      </html>
-    );
-  }
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
-      <Head>
-        <title>Anmol Sharma | Portfolio</title>
-        <meta name="description" content="Portfolio of Anmol Sharma, Data Scientist and Machine Learning Engineer" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#3b82f6" />
-        <meta name="msapplication-TileColor" content="#3b82f6" />
-      </Head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider>
-          <AnimatePresence mode="wait">
-            <Navigation />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Toaster />
-          </AnimatePresence>
+          <Navigation />
+          <main className="flex-1">{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

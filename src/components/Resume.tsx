@@ -1,61 +1,84 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { Download, Calendar, MapPin, ExternalLink, Briefcase, GraduationCap, Award } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import {
+  Download,
+  Calendar,
+  MapPin,
+  ExternalLink,
+  Briefcase,
+  GraduationCap,
+  Award,
+} from 'lucide-react';
 
 const Resume = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const [activeTab, setActiveTab] = useState<'experience' | 'education' | 'certifications'>('experience')
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [activeTab, setActiveTab] = useState<'experience' | 'education' | 'certifications'>(
+    'experience'
+  );
 
   const experience = [
     {
-      title: "Senior Data Scientist",
-      company: "TechCorp Solutions",
-      period: "2022 - Present",
-      location: "San Francisco, CA",
-      description: "Leading machine learning initiatives and developing AI solutions for enterprise clients.",
-      technologies: ["Python", "TensorFlow", "AWS", "Docker"]
+      title: 'Senior Data Scientist',
+      company: 'AI Research Lab',
+      period: '2021 - Present',
+      location: 'Remote',
+      description: 'Leading a team of data scientists in developing cutting-edge AI solutions. Specializing in natural language processing, computer vision, and deep learning. Published research papers and contributed to open-source AI projects.',
+      technologies: ['Python', 'PyTorch', 'TensorFlow', 'Transformers', 'NLP', 'Computer Vision', 'AWS', 'Docker']
     },
     {
-      title: "Data Scientist",
-      company: "DataFlow Analytics",
-      period: "2020 - 2022",
-      location: "New York, NY",
-      description: "Built and deployed machine learning models for financial risk assessment.",
-      technologies: ["Python", "Scikit-learn", "PostgreSQL", "Tableau"]
+      title: 'Machine Learning Engineer',
+      company: 'Tech Innovations Inc.',
+      period: '2019 - 2021',
+      location: 'San Francisco, CA',
+      description: 'Developed and deployed machine learning models for various applications. Built scalable data pipelines and worked on model optimization. Collaborated with product teams to integrate AI features into existing products.',
+      technologies: ['Python', 'Scikit-learn', 'TensorFlow', 'Kubernetes', 'GCP', 'BigQuery']
     }
-  ]
+  ];
 
   const education = [
     {
-      degree: "Master of Science in Data Science",
-      institution: "Stanford University",
-      period: "2017 - 2019",
-      gpa: "3.9/4.0"
+      degree: 'M.S. in Artificial Intelligence',
+      institution: 'Stanford University',
+      period: '2018 - 2020',
+      gpa: '3.9/4.0',
+      description: 'Specialized in Machine Learning, Deep Learning, and Natural Language Processing. Thesis on "Advancements in Transformer Architectures for NLP"'
     },
     {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "MIT",
-      period: "2013 - 2017",
-      gpa: "3.8/4.0"
+      degree: 'B.Tech in Computer Science',
+      institution: 'Indian Institute of Technology (IIT)',
+      period: '2014 - 2018',
+      gpa: '9.2/10',
+      description: 'Focus on Algorithms, Data Structures, and Machine Learning. Graduated with Honors.'
     }
-  ]
+  ];
 
   const certifications = [
     {
-      name: "AWS Certified Machine Learning - Specialty",
-      issuer: "Amazon Web Services",
-      date: "2023"
+      name: 'Deep Learning Specialization',
+      issuer: 'deeplearning.ai',
+      date: '2022',
+      credential: 'View Credential',
+      credentialUrl: '#'
     },
     {
-      name: "Google Cloud Professional Data Engineer",
-      issuer: "Google Cloud",
-      date: "2022"
+      name: 'Machine Learning',
+      issuer: 'Stanford University (Coursera)',
+      date: '2021',
+      credential: 'View Credential',
+      credentialUrl: '#'
+    },
+    {
+      name: 'Data Science Professional Certificate',
+      issuer: 'IBM',
+      date: '2020',
+      credential: 'View Credential',
+      credentialUrl: '#'
     }
-  ]
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -63,10 +86,10 @@ const Resume = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  }
+        delayChildren: 0.1,
+      },
+    },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -75,10 +98,10 @@ const Resume = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  }
+        ease: 'easeOut',
+      },
+    },
+  };
 
   const timelineVariants = {
     hidden: { opacity: 0, x: -50 },
@@ -87,17 +110,17 @@ const Resume = () => {
       x: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  }
+        ease: 'easeOut',
+      },
+    },
+  };
 
   const handleDownload = () => {
-    const link = document.createElement('a')
-    link.href = '/resume.pdf'
-    link.download = 'Anmol_Sharma_Resume.pdf'
-    link.click()
-  }
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Anmol_Sharma_Resume.pdf';
+    link.click();
+  };
 
   return (
     <section id="resume" className="py-20 relative z-10">
@@ -109,7 +132,7 @@ const Resume = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2 
+          <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
@@ -119,16 +142,6 @@ const Resume = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             My professional journey, education, and certifications in data science and AI.
           </p>
-          
-          <motion.button
-            onClick={handleDownload}
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300 mx-auto"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Download size={20} />
-            Download PDF Resume
-          </motion.button>
         </motion.div>
 
         {/* Tab Navigation */}
@@ -137,14 +150,14 @@ const Resume = () => {
             {[
               { id: 'experience', label: 'Experience', icon: Briefcase },
               { id: 'education', label: 'Education', icon: GraduationCap },
-              { id: 'certifications', label: 'Certifications', icon: Award }
+              { id: 'certifications', label: 'Certifications', icon: Award },
             ].map((tab) => (
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-300 ${
-                  activeTab === tab.id 
-                    ? 'bg-primary text-white' 
+                  activeTab === tab.id
+                    ? 'bg-primary text-white'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
                 whileHover={{ scale: 1.05 }}
@@ -163,44 +176,45 @@ const Resume = () => {
 
           {activeTab === 'experience' && (
             <div className="space-y-8">
-              {experience.map((job, index) => (
+              {experience.map((exp, idx) => (
                 <motion.div
-                  key={index}
+                  key={idx}
                   initial={{ opacity: 0, x: -50 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.2, duration: 0.8 }}
+                  transition={{ delay: idx * 0.2, duration: 0.8 }}
                   className="relative pl-16"
                 >
                   <div className="absolute left-6 top-4 w-4 h-4 bg-primary rounded-full border-4 border-background" />
-                  
+
                   <motion.div
                     className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300"
                     whileHover={{ scale: 1.02, x: 10 }}
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div>
-                        <h3 className="text-xl font-bold text-primary">{job.title}</h3>
-                        <p className="text-lg font-semibold">{job.company}</p>
+                        <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
+                        <p className="text-lg font-semibold">{exp.company}</p>
                       </div>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2 md:mt-0">
                         <Calendar size={14} />
-                        {job.period}
+                        {exp.period}
                         <MapPin size={14} />
-                        {job.location}
+                        {exp.location}
                       </div>
                     </div>
-                    
-                    <p className="text-muted-foreground mb-4">{job.description}</p>
-                    
+
+                    <p className="text-muted-foreground mb-4">{exp.description}</p>
+
                     <div className="flex flex-wrap gap-2">
-                      {job.technologies.map((tech, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      {exp.technologies &&
+                        exp.technologies.map((tech: string, idx: number) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                     </div>
                   </motion.div>
                 </motion.div>
@@ -210,16 +224,16 @@ const Resume = () => {
 
           {activeTab === 'education' && (
             <div className="space-y-8">
-              {education.map((edu, index) => (
+              {education.map((edu, idx) => (
                 <motion.div
-                  key={index}
+                  key={idx}
                   initial={{ opacity: 0, x: -50 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.2, duration: 0.8 }}
+                  transition={{ delay: idx * 0.2, duration: 0.8 }}
                   className="relative pl-16"
                 >
                   <div className="absolute left-6 top-4 w-4 h-4 bg-secondary rounded-full border-4 border-background" />
-                  
+
                   <motion.div
                     className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300"
                     whileHover={{ scale: 1.02, x: 10 }}
@@ -243,12 +257,12 @@ const Resume = () => {
 
           {activeTab === 'certifications' && (
             <div className="space-y-6">
-              {certifications.map((cert, index) => (
+              {certifications.map((cert, idx) => (
                 <motion.div
-                  key={index}
+                  key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: index * 0.2, duration: 0.8 }}
+                  transition={{ delay: idx * 0.2, duration: 0.8 }}
                   className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300"
                   whileHover={{ scale: 1.02, y: -5 }}
                 >
@@ -269,7 +283,7 @@ const Resume = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Resume 
+export default Resume;
