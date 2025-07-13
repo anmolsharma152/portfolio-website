@@ -1,8 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, Variants } from 'framer-motion';
+import { useRef, ElementRef } from 'react';
 import { User, Award, Briefcase, GraduationCap } from 'lucide-react';
 
 const About = () => {
@@ -16,30 +15,32 @@ const About = () => {
     { icon: GraduationCap, label: 'Certifications', value: '5' },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
+        duration: 0.5,
+        when: 'beforeChildren',
         staggerChildren: 0.1,
-        delayChildren: 0.05,
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.4,
-        ease: 'easeOut',
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
 
-  const statVariants = {
+  const statVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: (index: number) => ({
       opacity: 1,
@@ -47,19 +48,19 @@ const About = () => {
       transition: {
         duration: 0.3,
         delay: index * 0.05,
-        ease: 'easeOut',
+        ease: [0.4, 0, 0.2, 1],
       },
     }),
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { scale: 0.8, opacity: 0 },
     visible: {
       scale: 1,
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
@@ -71,13 +72,13 @@ const About = () => {
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-16"
         >
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6"
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           >
             <span className="gradient-text">About Me</span>
           </motion.h2>
@@ -101,7 +102,7 @@ const About = () => {
               className="relative"
               variants={imageVariants}
               whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             >
               <div className="w-80 h-80 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
                 <img 
@@ -125,7 +126,7 @@ const About = () => {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: 'easeInOut',
+                  ease: [0.4, 0, 0.2, 1],
                 }}
               >
                 <span className="text-white font-bold">AI</span>
@@ -142,18 +143,33 @@ const About = () => {
                   whileHover={{
                     scale: 1.05,
                     y: -5,
-                    transition: { duration: 0.3 },
+                    transition: { 
+                      duration: 0.3,
+                      ease: [0.4, 0, 0.2, 1] 
+                    },
                   }}
                   className="text-center p-4 glass rounded-lg hover:shadow-lg transition-all duration-300"
                 >
-                  <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                  <motion.div 
+                    whileHover={{ 
+                      rotate: 360,
+                      transition: { 
+                        duration: 0.6,
+                        ease: [0.4, 0, 0.2, 1] 
+                      } 
+                    }}
+                  >
                     <stat.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
                   </motion.div>
                   <motion.div
                     className="text-2xl font-bold gradient-text"
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
-                    transition={{ delay: 0.3 + index * 0.05, duration: 0.25 }}
+                    transition={{ 
+                      delay: 0.3 + index * 0.05, 
+                      duration: 0.25,
+                      ease: [0.4, 0, 0.2, 1] 
+                    }}
                   >
                     {stat.value}
                   </motion.div>
@@ -165,7 +181,15 @@ const About = () => {
 
           {/* Right Column - Content */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <motion.div whileHover={{ x: 10 }} transition={{ duration: 0.3 }}>
+            <motion.div 
+              whileHover={{ 
+                x: 10,
+                transition: { 
+                  duration: 0.3,
+                  ease: [0.4, 0, 0.2, 1] 
+                } 
+              }}
+            >
               <h3 className="text-2xl font-bold mb-4">Who I Am</h3>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 I am a passionate Data Scientist and AI Specialist with expertise in machine
@@ -195,8 +219,18 @@ const About = () => {
                     className="flex items-start space-x-3"
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-                    whileHover={{ x: 5 }}
+                    transition={{ 
+                      delay: 0.6 + index * 0.1, 
+                      duration: 0.5,
+                      ease: [0.4, 0, 0.2, 1] 
+                    }}
+                    whileHover={{ 
+                      x: 5,
+                      transition: { 
+                        duration: 0.3,
+                        ease: [0.4, 0, 0.2, 1] 
+                      } 
+                    }}
                   >
                     <motion.div
                       className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"

@@ -7,7 +7,9 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export const useGSAPAnimations = () => {
+type GSAPElement = Element | Element[] | NodeListOf<Element> | HTMLCollection | null;
+
+export const useGSAPAnimations = (): void => {
   useEffect(() => {
     // Hero section animations
     gsap.from('.hero-title', {
@@ -28,7 +30,8 @@ export const useGSAPAnimations = () => {
     // Section animations
     ScrollTrigger.batch('.section-animate', {
       start: 'top 80%',
-      onEnter: (elements) => {
+      onEnter: (elements: GSAPElement) => {
+        if (!elements) return;
         gsap.from(elements, {
           duration: 0.4,
           y: 30,
@@ -42,7 +45,8 @@ export const useGSAPAnimations = () => {
     // Skill bar animations
     ScrollTrigger.batch('.skill-bar', {
       start: 'top 80%',
-      onEnter: (elements) => {
+      onEnter: (elements: GSAPElement) => {
+        if (!elements) return;
         gsap.from(elements, {
           duration: 0.5,
           width: 0,
@@ -55,7 +59,8 @@ export const useGSAPAnimations = () => {
     // Project card animations
     ScrollTrigger.batch('.project-card', {
       start: 'top 85%',
-      onEnter: (elements) => {
+      onEnter: (elements: GSAPElement) => {
+        if (!elements) return;
         gsap.from(elements, {
           duration: 0.3,
           y: 15,
@@ -68,7 +73,13 @@ export const useGSAPAnimations = () => {
 
     return () => {
       // Cleanup ScrollTrigger instances
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (typeof window !== 'undefined') {
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger) {
+            trigger.kill();
+          }
+        });
+      }
     };
   }, []);
 };

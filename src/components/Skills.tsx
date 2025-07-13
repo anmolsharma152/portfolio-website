@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -51,48 +51,49 @@ const Skills = () => {
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
         delayChildren: 0.1,
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
 
-  const categoryVariants = {
+  const categoryVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
 
-  const skillVariants = {
+  const skillVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
+        ease: [0.4, 0, 0.2, 1],
       },
     },
   };
 
-  const progressVariants = {
+  const progressVariants: Variants = {
     hidden: { width: 0 },
     visible: (level: number) => ({
       width: `${level}%`,
       transition: {
         duration: 1.5,
-        ease: 'easeOut',
+        ease: [0.4, 0, 0.2, 1],
         delay: 0.3,
       },
     }),
@@ -133,14 +134,22 @@ const Skills = () => {
               variants={categoryVariants}
               whileHover={{
                 scale: 1.02,
-                transition: { duration: 0.3 },
+                transition: { 
+                  duration: 0.3,
+                  ease: [0.4, 0, 0.2, 1] 
+                },
               }}
               className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300"
             >
               <motion.h3
                 className="text-2xl font-bold mb-6 text-center"
-                whileHover={{ color: 'var(--primary)' }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ 
+                  color: 'var(--primary)',
+                  transition: { 
+                    duration: 0.3,
+                    ease: [0.4, 0, 0.2, 1] 
+                  } 
+                }}
               >
                 {category.title}
               </motion.h3>
@@ -149,8 +158,13 @@ const Skills = () => {
                   <motion.div
                     key={skill.name}
                     variants={skillVariants}
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ 
+                      x: 5,
+                      transition: { 
+                        duration: 0.2,
+                        ease: [0.4, 0, 0.2, 1] 
+                      } 
+                    }}
                   >
                     <div className="flex justify-between items-center mb-2">
                       <span className="font-medium">{skill.name}</span>
@@ -172,12 +186,12 @@ const Skills = () => {
                         <motion.div
                           className="absolute inset-0 bg-white opacity-20"
                           animate={{
-                            x: ['-100%', '100%'],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: 'linear',
+                          x: ['-100%', '100%'],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: [0.4, 0, 0.6, 1],
                             delay: 1 + skillIndex * 0.1,
                           }}
                         />

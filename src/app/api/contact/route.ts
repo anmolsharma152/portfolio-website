@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+export const runtime = 'nodejs';
+
+
 export async function POST(request: Request) {
   try {
     const { name, email, subject, message } = await request.json();
