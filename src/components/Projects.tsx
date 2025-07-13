@@ -1,79 +1,81 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
-import { ExternalLink, Github, Star, GitBranch } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { ExternalLink, Github, Star, GitBranch } from 'lucide-react';
 
 interface GitHubRepo {
-  id: number
-  name: string
-  description: string | null
-  html_url: string
-  homepage: string | null
-  stargazers_count: number
-  forks_count: number
-  language: string | null
-  topics: string[]
-  updated_at: string
-  fork: boolean
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  homepage: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  topics: string[];
+  updated_at: string;
+  fork: boolean;
 }
 
 const Projects = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const [repos, setRepos] = useState<GitHubRepo[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const response = await fetch('https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=6')
+        const response = await fetch(
+          'https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=6'
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch repositories')
+          throw new Error('Failed to fetch repositories');
         }
-        const data = await response.json()
+        const data = await response.json();
         // Filter out forks and sort by stars
         const filteredRepos = data
           .filter((repo: GitHubRepo) => !repo.fork)
-          .sort((a: GitHubRepo, b: GitHubRepo) => b.stargazers_count - a.stargazers_count)
-        setRepos(filteredRepos)
+          .sort((a: GitHubRepo, b: GitHubRepo) => b.stargazers_count - a.stargazers_count);
+        setRepos(filteredRepos);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch repositories')
+        setError(err instanceof Error ? err.message : 'Failed to fetch repositories');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchRepos()
-  }, [])
+    fetchRepos();
+  }, []);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
-    })
-  }
+      day: 'numeric',
+    });
+  };
 
   const getLanguageColor = (language: string | null) => {
     const colors: { [key: string]: string } = {
-      'Python': 'bg-blue-500',
-      'JavaScript': 'bg-yellow-400',
-      'TypeScript': 'bg-blue-600',
-      'React': 'bg-cyan-500',
-      'HTML': 'bg-orange-500',
-      'CSS': 'bg-purple-500',
-      'Java': 'bg-red-500',
+      Python: 'bg-blue-500',
+      JavaScript: 'bg-yellow-400',
+      TypeScript: 'bg-blue-600',
+      React: 'bg-cyan-500',
+      HTML: 'bg-orange-500',
+      CSS: 'bg-purple-500',
+      Java: 'bg-red-500',
       'C++': 'bg-pink-500',
       'C#': 'bg-green-500',
-      'Go': 'bg-cyan-600',
-      'Rust': 'bg-orange-600',
-      'PHP': 'bg-purple-600'
-    }
-    return colors[language || ''] || 'bg-gray-500'
-  }
+      Go: 'bg-cyan-600',
+      Rust: 'bg-orange-600',
+      PHP: 'bg-purple-600',
+    };
+    return colors[language || ''] || 'bg-gray-500';
+  };
 
   if (loading) {
     return (
@@ -98,7 +100,7 @@ const Projects = () => {
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   if (error) {
@@ -133,7 +135,7 @@ const Projects = () => {
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -183,10 +185,13 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="flex-shrink-0"
                     >
-                      <Github size={20} className="text-muted-foreground hover:text-primary transition-colors duration-300" />
+                      <Github
+                        size={20}
+                        className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                      />
                     </a>
                   </div>
-                  
+
                   <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-4">
                     {repo.description || 'No description available'}
                   </p>
@@ -195,7 +200,9 @@ const Projects = () => {
                   <div className="flex items-center justify-between">
                     {repo.language && (
                       <div className="flex items-center space-x-2">
-                        <div className={`w-3 h-3 rounded-full ${getLanguageColor(repo.language)}`}></div>
+                        <div
+                          className={`w-3 h-3 rounded-full ${getLanguageColor(repo.language)}`}
+                        ></div>
                         <span className="text-xs text-muted-foreground">{repo.language}</span>
                       </div>
                     )}
@@ -292,7 +299,7 @@ const Projects = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Projects 
+export default Projects;

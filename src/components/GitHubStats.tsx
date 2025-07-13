@@ -1,93 +1,98 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
-import { Github, Star, GitBranch, Calendar, TrendingUp, Users } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { Github, Star, GitBranch, Calendar, TrendingUp, Users } from 'lucide-react';
 
 interface GitHubStats {
-  totalStars: number
-  totalForks: number
-  totalRepos: number
-  totalCommits: number
-  followers: number
-  following: number
-  contributions: number
-  topLanguages: { [key: string]: number }
+  totalStars: number;
+  totalForks: number;
+  totalRepos: number;
+  totalCommits: number;
+  followers: number;
+  following: number;
+  contributions: number;
+  topLanguages: { [key: string]: number };
   recentActivity: Array<{
-    type: string
-    repo: string
-    date: string
-    description: string
-  }>
+    type: string;
+    repo: string;
+    date: string;
+    description: string;
+  }>;
 }
 
 const GitHubStats = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const [stats, setStats] = useState<GitHubStats | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [stats, setStats] = useState<GitHubStats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGitHubStats = async () => {
       try {
-        setLoading(true)
-        
+        setLoading(true);
+
         // Fetch user data
-        const userResponse = await fetch('https://api.github.com/users/anmolsharma152')
+        const userResponse = await fetch('https://api.github.com/users/anmolsharma152');
         if (!userResponse.ok) {
-          throw new Error('Failed to fetch user data')
+          throw new Error('Failed to fetch user data');
         }
-        const userData = await userResponse.json()
-        
+        const userData = await userResponse.json();
+
         // Fetch repositories
-        const reposResponse = await fetch('https://api.github.com/users/anmolsharma152/repos?per_page=100')
+        const reposResponse = await fetch(
+          'https://api.github.com/users/anmolsharma152/repos?per_page=100'
+        );
         if (!reposResponse.ok) {
-          throw new Error('Failed to fetch repositories')
+          throw new Error('Failed to fetch repositories');
         }
-        const reposData = await reposResponse.json()
-        
+        const reposData = await reposResponse.json();
+
         // Calculate stats
-        const totalStars = reposData.reduce((sum: number, repo: any) => sum + repo.stargazers_count, 0)
-        const totalForks = reposData.reduce((sum: number, repo: any) => sum + repo.forks_count, 0)
-        const totalRepos = reposData.length
-        
+        const totalStars = reposData.reduce(
+          (sum: number, repo: any) => sum + repo.stargazers_count,
+          0
+        );
+        const totalForks = reposData.reduce((sum: number, repo: any) => sum + repo.forks_count, 0);
+        const totalRepos = reposData.length;
+
         // Calculate top languages
-        const languageStats: { [key: string]: number } = {}
+        const languageStats: { [key: string]: number } = {};
         reposData.forEach((repo: any) => {
           if (repo.language) {
-            languageStats[repo.language] = (languageStats[repo.language] || 0) + 1
+            languageStats[repo.language] = (languageStats[repo.language] || 0) + 1;
           }
-        })
-        
+        });
+
         // Sort languages by frequency
         const topLanguages = Object.fromEntries(
           Object.entries(languageStats)
-            .sort(([,a], [,b]) => b - a)
+            .sort(([, a], [, b]) => b - a)
             .slice(0, 5)
-        )
-        
+        );
+
         // Mock recent activity (in real implementation, you'd fetch this from GitHub API)
         const recentActivity = [
           {
             type: 'push',
             repo: 'portfolio-website',
             date: '2024-01-15',
-            description: 'Updated portfolio with new animations'
+            description: 'Updated portfolio with new animations',
           },
           {
             type: 'star',
             repo: 'machine-learning-project',
             date: '2024-01-14',
-            description: 'Added new ML model implementation'
+            description: 'Added new ML model implementation',
           },
           {
             type: 'fork',
             repo: 'data-analysis-tool',
             date: '2024-01-13',
-            description: 'Created data visualization dashboard'
-          }
-        ]
-        
+            description: 'Created data visualization dashboard',
+          },
+        ];
+
         const githubStats: GitHubStats = {
           totalStars,
           totalForks,
@@ -97,38 +102,38 @@ const GitHubStats = () => {
           following: userData.following,
           contributions: Math.floor(Math.random() * 2000) + 1000, // Mock data
           topLanguages,
-          recentActivity
-        }
-        
-        setStats(githubStats)
-      } catch (err) {
-        console.error('GitHub API error:', err)
-        setError('Failed to fetch GitHub statistics')
-      } finally {
-        setLoading(false)
-      }
-    }
+          recentActivity,
+        };
 
-    fetchGitHubStats()
-  }, [])
+        setStats(githubStats);
+      } catch (err) {
+        console.error('GitHub API error:', err);
+        setError('Failed to fetch GitHub statistics');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGitHubStats();
+  }, []);
 
   const getLanguageColor = (language: string) => {
     const colors: { [key: string]: string } = {
-      'Python': 'bg-blue-500',
-      'JavaScript': 'bg-yellow-400',
-      'TypeScript': 'bg-blue-600',
-      'React': 'bg-cyan-500',
-      'HTML': 'bg-orange-500',
-      'CSS': 'bg-purple-500',
-      'Java': 'bg-red-500',
+      Python: 'bg-blue-500',
+      JavaScript: 'bg-yellow-400',
+      TypeScript: 'bg-blue-600',
+      React: 'bg-cyan-500',
+      HTML: 'bg-orange-500',
+      CSS: 'bg-purple-500',
+      Java: 'bg-red-500',
       'C++': 'bg-pink-500',
       'C#': 'bg-green-500',
-      'Go': 'bg-cyan-600',
-      'Rust': 'bg-orange-600',
-      'PHP': 'bg-purple-600'
-    }
-    return colors[language] || 'bg-gray-500'
-  }
+      Go: 'bg-cyan-600',
+      Rust: 'bg-orange-600',
+      PHP: 'bg-purple-600',
+    };
+    return colors[language] || 'bg-gray-500';
+  };
 
   if (loading) {
     return (
@@ -153,7 +158,7 @@ const GitHubStats = () => {
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   if (error || !stats) {
@@ -188,7 +193,7 @@ const GitHubStats = () => {
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -201,7 +206,7 @@ const GitHubStats = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2 
+          <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
@@ -222,11 +227,31 @@ const GitHubStats = () => {
         >
           {[
             { icon: Star, label: 'Total Stars', value: stats.totalStars, color: 'text-yellow-500' },
-            { icon: GitBranch, label: 'Total Forks', value: stats.totalForks, color: 'text-blue-500' },
-            { icon: Github, label: 'Repositories', value: stats.totalRepos, color: 'text-purple-500' },
-            { icon: TrendingUp, label: 'Total Commits', value: stats.totalCommits, color: 'text-green-500' },
+            {
+              icon: GitBranch,
+              label: 'Total Forks',
+              value: stats.totalForks,
+              color: 'text-blue-500',
+            },
+            {
+              icon: Github,
+              label: 'Repositories',
+              value: stats.totalRepos,
+              color: 'text-purple-500',
+            },
+            {
+              icon: TrendingUp,
+              label: 'Total Commits',
+              value: stats.totalCommits,
+              color: 'text-green-500',
+            },
             { icon: Users, label: 'Followers', value: stats.followers, color: 'text-pink-500' },
-            { icon: Calendar, label: 'Contributions', value: stats.contributions, color: 'text-cyan-500' }
+            {
+              icon: Calendar,
+              label: 'Contributions',
+              value: stats.contributions,
+              color: 'text-cyan-500',
+            },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -243,11 +268,11 @@ const GitHubStats = () => {
               >
                 <stat.icon className="w-6 h-6 text-white" />
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="text-3xl font-bold gradient-text mb-2"
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
-                transition={{ delay: 0.3 + index * 0.05, type: "spring", stiffness: 200 }}
+                transition={{ delay: 0.3 + index * 0.05, type: 'spring', stiffness: 200 }}
               >
                 {stat.value.toLocaleString()}
               </motion.div>
@@ -311,7 +336,7 @@ const GitHubStats = () => {
               </motion.div>
             ))}
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -331,7 +356,7 @@ const GitHubStats = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default GitHubStats 
+export default GitHubStats;

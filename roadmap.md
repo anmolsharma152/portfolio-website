@@ -1,5 +1,13 @@
 # Personal Website Roadmap
 
+> All placeholder and fake data has been removed or replaced with real information. Future improvements include adding a real resume, further linter/code quality work, and any new features or sections as needed.
+
+## Recent Linter/Code Quality Improvements
+- Ongoing: Addressing all linter warnings and errors for better type safety, import order, code style, and maintainability.
+- Replacing all `any` types with specific interfaces or `unknown`.
+- Fixing JSX entity errors and improving code readability.
+- Removing unused variables and improving React hooks usage.
+
 This roadmap outlines the strategic enhancements for evolving your portfolio into a full-featured personal website, including frontend, backend, and infrastructure improvements.
 
 ---

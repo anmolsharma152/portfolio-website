@@ -99,12 +99,12 @@ As an AI Specialist, this portfolio showcases advanced AI/ML capabilities:
    Create a `.env.local` file in the root directory:
    ```
    # SMTP Configuration (for contact form)
-   SMTP_HOST=smtp.example.com
+   SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
-   SMTP_USER=your-email@example.com
-   SMTP_PASS=your-email-password
-   SMTP_FROM=Portfolio Contact <noreply@example.com>
-   SMTP_TO=your-email@example.com
+   SMTP_USER=ozymandias.work@gmail.com
+   SMTP_PASS=your-real-email-password
+   SMTP_FROM=Portfolio Contact <ozymandias.work@gmail.com>
+   SMTP_TO=ozymandias.work@gmail.com
    ```
 
 4. Start the development server:
@@ -247,7 +247,7 @@ Update the following files with your information:
 3. Configure build settings if needed
 
 ### GitHub Pages
-1. Add `"homepage": "https://yourusername.github.io/repo-name"` to package.json
+1. Add `"homepage": "https://anmolsharma152.github.io/portfolio-website"` to package.json
 2. Install gh-pages: `npm install --save-dev gh-pages`
 3. Add deploy script: `"deploy": "gh-pages -d dist"`
 4. Run: `npm run build && npm run deploy`

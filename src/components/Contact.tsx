@@ -21,7 +21,7 @@ type FormData = z.infer<typeof formSchema>;
 const Contact = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
-  
+
   const {
     register,
     handleSubmit,
@@ -42,21 +42,21 @@ const Contact = () => {
       icon: Mail,
       label: 'Email',
       value: 'ozymandias.work@gmail.com',
-      link: 'mailto:ozymandias.work@gmail.com'
+      link: 'mailto:ozymandias.work@gmail.com',
     },
     {
       icon: Github,
       label: 'GitHub',
       value: 'github.com/anmolsharma152',
-      link: 'https://github.com/anmolsharma152'
+      link: 'https://github.com/anmolsharma152',
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
       value: 'linkedin.com/in/anmol-sharma-8307582bb',
-      link: 'https://www.linkedin.com/in/anmol-sharma-8307582bb/'
-    }
-  ]
+      link: 'https://www.linkedin.com/in/anmol-sharma-8307582bb/',
+    },
+  ];
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -75,13 +75,15 @@ const Contact = () => {
       }
 
       // Show success toast
-      toast.success('Message sent successfully! I\'ll get back to you soon.');
-      
+      toast.success("Message sent successfully! I'll get back to you soon.");
+
       // Reset form
       reset();
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast.error(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+      toast.error(
+        error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+      );
     }
   };
 
@@ -99,7 +101,8 @@ const Contact = () => {
             <span className="gradient-text">Get In Touch</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start a conversation? Let's discuss your next project or collaboration opportunity.
+            Ready to start a conversation? Let's discuss your next project or collaboration
+            opportunity.
           </p>
         </motion.div>
 
@@ -114,8 +117,9 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                I'm always interested in hearing about new opportunities and exciting projects. 
-                Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                I'm always interested in hearing about new opportunities and exciting projects.
+                Whether you have a question or just want to say hi, I'll try my best to get back to
+                you!
               </p>
             </div>
 
@@ -199,16 +203,17 @@ const Contact = () => {
                   <input
                     id="email"
                     type="email"
+                    autoComplete="email"
+                    placeholder="ozymandias.work@gmail.com"
                     {...register('email')}
                     className={`w-full px-4 py-3 bg-background border ${
                       errors.email ? 'border-red-500' : 'border-border'
                     } rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300`}
-                    placeholder="your.email@example.com"
                     disabled={isSubmitting}
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium mb-2">
                   Subject *
@@ -226,7 +231,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
                   Message *
@@ -245,7 +250,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                 />
               </div>
-              
+
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
@@ -270,7 +275,7 @@ const Contact = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact 
+export default Contact;

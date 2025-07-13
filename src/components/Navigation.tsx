@@ -1,56 +1,69 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X, Github, Linkedin, Mail } from 'lucide-react'
-import { useTheme } from '@/context/ThemeContext'
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sun, Moon, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
 
 const Navigation = () => {
-  const { theme, toggleTheme } = useTheme()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const { theme, toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
-  ]
-  
+    { name: 'Resume', href: '#resume' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
   const socialLinks = [
-    { 
-      icon: <Github size={18} />, 
-      href: 'https://github.com/yourusername',
-      label: 'GitHub'
+    {
+      icon: <Github size={18} />,
+      href: 'https://github.com/anmolsharma152',
+      label: 'GitHub',
     },
-    { 
-      icon: <Linkedin size={18} />, 
-      href: 'https://linkedin.com/in/yourusername',
-      label: 'LinkedIn'
+    {
+      icon: <Linkedin size={18} />,
+      href: 'https://linkedin.com/in/anmol-sharma-8307582bb',
+      label: 'LinkedIn',
     },
-    { 
-      icon: <Mail size={18} />, 
-      href: 'mailto:your.email@example.com',
-      label: 'Email'
-    }
-  ]
+    {
+      icon: <Mail size={18} />,
+      href: 'mailto:ozymandias.work@gmail.com',
+      label: 'Email',
+    },
+  ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
+    const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      const navHeight = 80; // Approximate navigation height
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
-    setIsMenuOpen(false)
-  }
+    setIsMenuOpen(false);
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+  };
 
   return (
     <motion.nav
@@ -58,8 +71,8 @@ const Navigation = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-border/50' 
+        scrolled
+          ? 'bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-border/50'
           : 'bg-background/50 dark:bg-background/50 backdrop-blur-sm'
       }`}
     >
@@ -68,12 +81,13 @@ const Navigation = () => {
           {/* Logo */}
           <motion.a
             href="#home"
+            onClick={(e) => handleNavClick(e, '#home')}
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex items-center space-x-3 group"
+            className="flex items-center space-x-3 group cursor-pointer"
           >
-            <motion.div 
+            <motion.div
               className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:shadow-blue-500/20 transition-all duration-300"
               whileHover={{ rotate: 15, scale: 1.05 }}
             >
@@ -90,10 +104,11 @@ const Navigation = () => {
               <motion.a
                 key={item.name}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 * index, duration: 0.3 }}
-                className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200 relative group"
+                className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200 relative group cursor-pointer"
               >
                 {item.name}
                 <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-4/5 group-hover:left-[10%]" />
@@ -113,11 +128,11 @@ const Navigation = () => {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ 
-                    delay: 0.5 + (index * 0.1),
+                  transition={{
+                    delay: 0.5 + index * 0.1,
                     type: 'spring',
                     stiffness: 300,
-                    damping: 20
+                    damping: 20,
                   }}
                   className="p-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-foreground/5 transition-colors duration-200"
                   aria-label={link.label}
@@ -153,11 +168,7 @@ const Navigation = () => {
               whileTap={{ scale: 0.95 }}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
           </div>
         </div>
@@ -174,20 +185,19 @@ const Navigation = () => {
             >
               <div className="px-2 pt-2 pb-4 space-y-1">
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => scrollToSection(item.href)}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.05 * index, duration: 0.2 }}
-                    className="block px-4 py-3 text-base font-medium text-foreground/90 hover:text-primary hover:bg-foreground/5 rounded-lg transition-colors duration-200 flex items-center"
+                    className="block w-full text-left px-4 py-3 text-base font-medium text-foreground/90 hover:text-primary hover:bg-foreground/5 rounded-lg transition-colors duration-200 flex items-center"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     {item.name}
-                  </motion.a>
+                  </motion.button>
                 ))}
-                
+
                 {/* Social Icons - Mobile */}
                 <div className="pt-2 mt-4 border-t border-border/20">
                   <div className="flex justify-center space-x-4 px-4">
@@ -199,10 +209,10 @@ const Navigation = () => {
                         rel="noopener noreferrer"
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ 
-                          delay: 0.2 + (index * 0.1),
+                        transition={{
+                          delay: 0.2 + index * 0.1,
                           type: 'spring',
-                          stiffness: 300
+                          stiffness: 300,
                         }}
                         className="p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/70 hover:text-primary transition-colors duration-200"
                         aria-label={link.label}
@@ -218,7 +228,7 @@ const Navigation = () => {
         </AnimatePresence>
       </div>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navigation 
+export default Navigation;

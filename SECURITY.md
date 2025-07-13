@@ -10,7 +10,7 @@ We take security issues seriously and appreciate your efforts to responsibly dis
 
 ### How to Report a Security Vulnerability
 
-If you discover a security vulnerability, please report it by emailing [security@yourdomain.com](mailto:security@yourdomain.com). Please do not file a public issue.
+If you discover a security vulnerability, please report it by emailing [ozymandias.work@gmail.com](mailto:ozymandias.work@gmail.com). Please do not file a public issue.
 
 In your email, please include:
 
@@ -89,7 +89,7 @@ Security updates will be released as patch versions (e.g., 1.0.0 → 1.0.1). We 
 
 ## Contact
 
-For any security-related questions or concerns, please contact [security@yourdomain.com](mailto:security@yourdomain.com).
+For any security-related questions or concerns, please contact [ozymandias.work@gmail.com](mailto:ozymandias.work@gmail.com).
 
 ## Disclosure Policy
 

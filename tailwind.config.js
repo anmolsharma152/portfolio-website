@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { fontFamily } = require('tailwindcss/defaultTheme')
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   darkMode: ['class'],
@@ -8,7 +8,7 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './index.html',
-    './src/**/*.{js,ts,jsx,tsx}'
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     container: {
@@ -30,27 +30,33 @@ module.exports = {
         foreground: 'hsl(var(--foreground-h, 0) var(--foreground-s, 0%) var(--foreground-l, 0%))',
         primary: {
           DEFAULT: 'hsl(var(--primary-h, 0) var(--primary-s, 0%) var(--primary-l, 0%))',
-          foreground: 'hsl(var(--primary-foreground-h, 0) var(--primary-foreground-s, 0%) var(--primary-foreground-l, 0%))',
+          foreground:
+            'hsl(var(--primary-foreground-h, 0) var(--primary-foreground-s, 0%) var(--primary-foreground-l, 0%))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary-h, 0) var(--secondary-s, 0%) var(--secondary-l, 0%))',
-          foreground: 'hsl(var(--secondary-foreground-h, 0) var(--secondary-foreground-s, 0%) var(--secondary-foreground-l, 0%))',
+          foreground:
+            'hsl(var(--secondary-foreground-h, 0) var(--secondary-foreground-s, 0%) var(--secondary-foreground-l, 0%))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive-h, 0) var(--destructive-s, 0%) var(--destructive-l, 0%))',
-          foreground: 'hsl(var(--destructive-foreground-h, 0) var(--destructive-foreground-s, 0%) var(--destructive-foreground-l, 0%))',
+          foreground:
+            'hsl(var(--destructive-foreground-h, 0) var(--destructive-foreground-s, 0%) var(--destructive-foreground-l, 0%))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted-h, 0) var(--muted-s, 0%) var(--muted-l, 0%))',
-          foreground: 'hsl(var(--muted-foreground-h, 0) var(--muted-foreground-s, 0%) var(--muted-foreground-l, 0%))',
+          foreground:
+            'hsl(var(--muted-foreground-h, 0) var(--muted-foreground-s, 0%) var(--muted-foreground-l, 0%))',
         },
         accent: {
           DEFAULT: 'hsl(var(--accent-h, 0) var(--accent-s, 0%) var(--accent-l, 0%))',
-          foreground: 'hsl(var(--accent-foreground-h, 0) var(--accent-foreground-s, 0%) var(--accent-foreground-l, 0%))',
+          foreground:
+            'hsl(var(--accent-foreground-h, 0) var(--accent-foreground-s, 0%) var(--accent-foreground-l, 0%))',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover-h, 0) var(--popover-s, 0%) var(--popover-l, 0%))',
-          foreground: 'hsl(var(--popover-foreground-h, 0) var(--popover-foreground-s, 0%) var(--popover-foreground-l, 0%))',
+          foreground:
+            'hsl(var(--popover-foreground-h, 0) var(--popover-foreground-s, 0%) var(--popover-foreground-l, 0%))',
         },
       },
       borderRadius: {
@@ -104,7 +110,8 @@ module.exports = {
       },
       card: {
         DEFAULT: 'hsl(var(--card-h, 0) var(--card-s, 0%) var(--card-l, 0%))',
-        foreground: 'hsl(var(--card-foreground-h, 0) var(--card-foreground-s, 0%) var(--card-foreground-l, 0%))',
+        foreground:
+          'hsl(var(--card-foreground-h, 0) var(--card-foreground-s, 0%) var(--card-foreground-l, 0%))',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -112,4 +119,4 @@ module.exports = {
     },
   },
   plugins: [require('tailwindcss-animate')],
-}
+};
