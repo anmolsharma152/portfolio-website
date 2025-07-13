@@ -5,9 +5,9 @@ import './globals.css';
 
 // Components
 import Navigation from '@/components/Navigation';
+import ThemeWrapper from '@/components/ThemeWrapper';
 import { Toaster } from '@/components/ui/Toaster';
 import { ThemeProvider } from '@/context/ThemeContext';
-import ThemeWrapper from '@/components/ThemeWrapper';
 
 // Load Inter font with specific subsets
 const inter = Inter({
