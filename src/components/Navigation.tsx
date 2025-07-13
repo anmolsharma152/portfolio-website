@@ -1,8 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+// Next.js and React
+
+// Third-party libraries
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+// Local imports
 import { useTheme } from '@/context/ThemeContext';
 
 const Navigation = () => {

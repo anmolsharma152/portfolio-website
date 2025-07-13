@@ -1,22 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-
-  const titles = [
+  const [titles] = useState([
     'Data Scientist',
     'AI Specialist',
     'ML Engineer',
     'Web Developer',
     'Software Engineer',
     'Data Analyst',
-  ];
+  ]);
 
   const typingSpeed = 50;
   const deletingSpeed = 25;

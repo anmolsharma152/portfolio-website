@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import Hero from './components/Hero';
+
 import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Resume from './components/Resume';
-import GitHubStats from './components/GitHubStats';
 import Contact from './components/Contact';
+import GitHubStats from './components/GitHubStats';
+import Hero from './components/Hero';
+import LoadingScreen from './components/LoadingScreen';
 import Navigation from './components/Navigation';
 import ParticleBackground from './components/ParticleBackground';
-import LoadingScreen from './components/LoadingScreen';
+import Projects from './components/Projects';
+import Resume from './components/Resume';
+import Skills from './components/Skills';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
@@ -36,9 +37,7 @@ function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  // Theme toggle function is available through the ThemeContext
 
   if (isLoading) {
     return <LoadingScreen />;

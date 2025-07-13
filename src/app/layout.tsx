@@ -1,9 +1,12 @@
-import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { Toaster } from '@/components/ui/Toaster';
-import Navigation from '@/components/Navigation';
-import './globals.css';
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import React from 'react';
+import './globals.css';
+
+// Components
+import Navigation from '@/components/Navigation';
+import { Toaster } from '@/components/ui/Toaster';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 // Load Inter font with specific subsets
 const inter = Inter({
@@ -13,10 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Anmol Sharma | Portfolio',
+  title: 'Anmol Sharma',
   description: 'Portfolio of Anmol Sharma, Data Scientist and Machine Learning Engineer',
-  viewport: 'width=device-width, initial-scale=1.0',
-  themeColor: '#3b82f6',
   manifest: '/site.webmanifest',
   icons: {
     icon: [
@@ -25,12 +26,8 @@ export const metadata: Metadata = {
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    other: [
-      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#3b82f6' },
-    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#3b82f6' }],
   },
   other: {
     'msapplication-TileColor': '#3b82f6',

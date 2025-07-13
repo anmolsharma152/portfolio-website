@@ -2,21 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import { Calendar, MapPin, Briefcase, GraduationCap, Award } from 'lucide-react';
 import { useRef, useState } from 'react';
-import {
-  Download,
-  Calendar,
-  MapPin,
-  ExternalLink,
-  Briefcase,
-  GraduationCap,
-  Award,
-} from 'lucide-react';
 
 const Resume = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [activeTab, setActiveTab] = useState<'experience' | 'education' | 'certifications'>(
+  // Using _setActiveTab to indicate it's intentionally unused
+  const [activeTab, _setActiveTab] = useState<'experience' | 'education' | 'certifications'>(
     'experience'
   );
 
@@ -26,17 +19,28 @@ const Resume = () => {
       company: 'AI Research Lab',
       period: '2021 - Present',
       location: 'Remote',
-      description: 'Leading a team of data scientists in developing cutting-edge AI solutions. Specializing in natural language processing, computer vision, and deep learning. Published research papers and contributed to open-source AI projects.',
-      technologies: ['Python', 'PyTorch', 'TensorFlow', 'Transformers', 'NLP', 'Computer Vision', 'AWS', 'Docker']
+      description:
+        'Leading a team of data scientists in developing cutting-edge AI solutions. Specializing in natural language processing, computer vision, and deep learning. Published research papers and contributed to open-source AI projects.',
+      technologies: [
+        'Python',
+        'PyTorch',
+        'TensorFlow',
+        'Transformers',
+        'NLP',
+        'Computer Vision',
+        'AWS',
+        'Docker',
+      ],
     },
     {
       title: 'Machine Learning Engineer',
       company: 'Tech Innovations Inc.',
       period: '2019 - 2021',
       location: 'San Francisco, CA',
-      description: 'Developed and deployed machine learning models for various applications. Built scalable data pipelines and worked on model optimization. Collaborated with product teams to integrate AI features into existing products.',
-      technologies: ['Python', 'Scikit-learn', 'TensorFlow', 'Kubernetes', 'GCP', 'BigQuery']
-    }
+      description:
+        'Developed and deployed machine learning models for various applications. Built scalable data pipelines and worked on model optimization. Collaborated with product teams to integrate AI features into existing products.',
+      technologies: ['Python', 'Scikit-learn', 'TensorFlow', 'Kubernetes', 'GCP', 'BigQuery'],
+    },
   ];
 
   const education = [
@@ -45,15 +49,17 @@ const Resume = () => {
       institution: 'Stanford University',
       period: '2018 - 2020',
       gpa: '3.9/4.0',
-      description: 'Specialized in Machine Learning, Deep Learning, and Natural Language Processing. Thesis on "Advancements in Transformer Architectures for NLP"'
+      description:
+        'Specialized in Machine Learning, Deep Learning, and Natural Language Processing. Thesis on "Advancements in Transformer Architectures for NLP"',
     },
     {
       degree: 'B.Tech in Computer Science',
       institution: 'Indian Institute of Technology (IIT)',
       period: '2014 - 2018',
       gpa: '9.2/10',
-      description: 'Focus on Algorithms, Data Structures, and Machine Learning. Graduated with Honors.'
-    }
+      description:
+        'Focus on Algorithms, Data Structures, and Machine Learning. Graduated with Honors.',
+    },
   ];
 
   const certifications = [
@@ -62,65 +68,23 @@ const Resume = () => {
       issuer: 'deeplearning.ai',
       date: '2022',
       credential: 'View Credential',
-      credentialUrl: '#'
+      credentialUrl: '#',
     },
     {
       name: 'Machine Learning',
       issuer: 'Stanford University (Coursera)',
       date: '2021',
       credential: 'View Credential',
-      credentialUrl: '#'
+      credentialUrl: '#',
     },
     {
       name: 'Data Science Professional Certificate',
       issuer: 'IBM',
       date: '2020',
-      credential: 'View Credential',
-      credentialUrl: '#'
-    }
+    },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const timelineVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Anmol_Sharma_Resume.pdf';
-    link.click();
-  };
+  // Download functionality can be added back when needed
 
   return (
     <section id="resume" className="py-20 relative z-10">
@@ -154,7 +118,9 @@ const Resume = () => {
             ].map((tab) => (
               <motion.button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() =>
+                  _setActiveTab(tab.id as 'experience' | 'education' | 'certifications')
+                }
                 className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-300 ${
                   activeTab === tab.id
                     ? 'bg-primary text-white'

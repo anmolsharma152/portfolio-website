@@ -4,9 +4,6 @@ import * as React from 'react';
 
 import type { ToastActionElement, ToastProps } from '@/components/ui/Toast';
 
-const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000000;
-
 type ToasterToast = ToastProps & {
   id: string;
   title?: React.ReactNode;
@@ -65,23 +62,24 @@ const addToRemoveQueue = (toastId: string) => {
       type: 'REMOVE_TOAST',
       toastId: toastId,
     });
-  }, TOAST_REMOVE_DELAY);
+  }, 1000);
 
-  toastTimeouts.set(toastId, timeout);
-};
+  toastTimeouts.set(toastId, timeout);};
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD_TOAST':
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+        toasts: [action.toast, ...state.toasts].slice(0, 5),
       };
 
     case 'UPDATE_TOAST':
       return {
         ...state,
-        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t
+        ),
       };
 
     case 'DISMISS_TOAST': {
@@ -176,7 +174,7 @@ function useToast() {
         listeners.splice(index, 1);
       }
     };
-  }, [state]);
+  }, []); // Removed state from dependency array
 
   return {
     ...state,

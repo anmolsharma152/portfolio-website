@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
 import { ExternalLink, Github, Star, GitBranch } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
 
 interface GitHubRepo {
   id: number;

@@ -1,13 +1,13 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Mail, Github, Linkedin, Send } from 'lucide-react';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { z } from 'zod';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
@@ -26,7 +26,7 @@ const Contact = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -101,8 +101,8 @@ const Contact = () => {
             <span className="gradient-text">Get In Touch</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start a conversation? Let's discuss your next project or collaboration
-            opportunity.
+            Ready to start a conversation? Let&apos;s discuss your next project or collaboration
+            opportunity. Or, if you&apos;d prefer, send me a message using the form below.
           </p>
         </motion.div>
 
@@ -115,11 +115,11 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
+              <h3 className="text-2xl font-bold mb-6">Let&apos;s Connect</h3>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                I'm always interested in hearing about new opportunities and exciting projects.
-                Whether you have a question or just want to say hi, I'll try my best to get back to
-                you!
+                I&apos;m always interested in hearing about new opportunities and exciting projects.
+                Whether you have a question or just want to say hi, I&apos;ll try my best to get
+                back to you!
               </p>
             </div>
 
@@ -218,7 +218,10 @@ const Contact = () => {
                 <label htmlFor="subject" className="block text-sm font-medium mb-2">
                   Subject *
                   {errors.subject && (
-                    <span className="ml-2 text-sm text-red-500">{errors.subject.message}</span>
+                    <p className="mb-4 text-gray-600 dark:text-gray-300">
+                      Feel free to reach out to me through any of these channels. I&apos;ll get back to
+                      you as soon as possible!
+                    </p>
                   )}
                 </label>
                 <input

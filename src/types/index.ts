@@ -17,8 +17,10 @@ export interface Skill {
   icon: string;
 }
 
+import { LucideIcon } from 'lucide-react';
+
 export interface ContactInfo {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: string;
   link: string;

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useToast } from '@/hooks/use-toast';
+
 import {
   Toast,
   ToastProvider,
@@ -10,6 +10,7 @@ import {
   ToastDescription,
   ToastClose,
 } from '@/components/ui/Toast';
+import { useToast } from '@/hooks/use-toast';
 
 export function Toaster() {
   const { toasts } = useToast();

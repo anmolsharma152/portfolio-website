@@ -10,43 +10,37 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      title: 'Programming Languages',
-      skills: [
-        { name: 'Python', level: 95 },
-        { name: 'TypeScript/JavaScript', level: 90 },
-        { name: 'SQL', level: 90 },
-        { name: 'R', level: 80 },
-        { name: 'Bash/Shell', level: 85 },
+      category: 'Frontend',
+      items: [
+        { name: 'HTML5', level: 95 },
+        { name: 'CSS3', level: 90 },
+        { name: 'JavaScript', level: 85 },
+        { name: 'TypeScript', level: 80 },
+        { name: 'React', level: 85 },
+        { name: 'Next.js', level: 80 },
+        { name: 'Tailwind CSS', level: 90 },
       ],
     },
     {
-      title: 'Machine Learning & AI',
-      skills: [
-        { name: 'TensorFlow', level: 90 },
-        { name: 'PyTorch', level: 88 },
-        { name: 'Scikit-learn', level: 95 },
-        { name: 'OpenCV', level: 85 },
-        { name: 'Transformers', level: 90 },
+      category: 'Backend',
+      items: [
+        { name: 'Node.js', level: 80 },
+        { name: 'Express', level: 75 },
+        { name: 'Python', level: 85 },
+        { name: 'Django', level: 70 },
+        { name: 'RESTful APIs', level: 80 },
+        { name: 'GraphQL', level: 70 },
       ],
     },
     {
-      title: 'Data Analysis & Visualization',
-      skills: [
-        { name: 'Pandas', level: 95 },
-        { name: 'NumPy', level: 92 },
-        { name: 'Matplotlib', level: 90 },
-        { name: 'Seaborn', level: 88 },
-        { name: 'Plotly', level: 85 },
-      ],
-    },
-    {
-      title: 'Tools & Technologies',
-      skills: [
-        { name: 'Git', level: 95 },
-        { name: 'Docker', level: 85 },
-        { name: 'AWS/GCP', level: 88 },
-        { name: 'Jupyter', level: 95 },
-        { name: 'MLflow', level: 90 },
+      category: 'Tools & Others',
+      items: [
+        { name: 'Git', level: 85 },
+        { name: 'Docker', level: 70 },
+        { name: 'AWS', level: 65 },
+        { name: 'Figma', level: 75 },
+        { name: 'Jest', level: 70 },
+        { name: 'Cypress', level: 65 },
       ],
     },
   ];
@@ -56,8 +50,9 @@ const Skills = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        duration: 0.5,
+        when: 'beforeChildren',
+        staggerChildren: 0.1,
         ease: [0.4, 0, 0.2, 1],
       },
     },
@@ -75,16 +70,17 @@ const Skills = () => {
     },
   };
 
-  const skillVariants: Variants = {
+  const skillVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: {
+    visible: (i: number) => ({
       opacity: 1,
       x: 0,
+      y: 0,
       transition: {
+        delay: 0.2 + i * 0.05,
         duration: 0.5,
-        ease: [0.4, 0, 0.2, 1],
       },
-    },
+    }),
   };
 
   const progressVariants: Variants = {
@@ -128,42 +124,44 @@ const Skills = () => {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {skillCategories.map((category) => (
+          {skillCategories.map((category, index) => (
             <motion.div
-              key={category.title}
+              key={category.category}
               variants={categoryVariants}
+              custom={index}
               whileHover={{
                 scale: 1.02,
-                transition: { 
+                transition: {
                   duration: 0.3,
-                  ease: [0.4, 0, 0.2, 1] 
+                  ease: [0.4, 0, 0.2, 1],
                 },
               }}
               className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300"
             >
               <motion.h3
                 className="text-2xl font-bold mb-6 text-center"
-                whileHover={{ 
+                whileHover={{
                   color: 'var(--primary)',
-                  transition: { 
+                  transition: {
                     duration: 0.3,
-                    ease: [0.4, 0, 0.2, 1] 
-                  } 
+                    ease: [0.4, 0, 0.2, 1],
+                  },
                 }}
               >
-                {category.title}
+                {category.category}
               </motion.h3>
               <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
+                {category.items.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
                     variants={skillVariants}
-                    whileHover={{ 
+                    custom={skillIndex}
+                    whileHover={{
                       x: 5,
-                      transition: { 
+                      transition: {
                         duration: 0.2,
-                        ease: [0.4, 0, 0.2, 1] 
-                      } 
+                        ease: [0.4, 0, 0.2, 1],
+                      },
                     }}
                   >
                     <div className="flex justify-between items-center mb-2">
@@ -186,12 +184,12 @@ const Skills = () => {
                         <motion.div
                           className="absolute inset-0 bg-white opacity-20"
                           animate={{
-                          x: ['-100%', '100%'],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: [0.4, 0, 0.6, 1],
+                            x: ['-100%', '100%'],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: [0.4, 0, 0.6, 1],
                             delay: 1 + skillIndex * 0.1,
                           }}
                         />
