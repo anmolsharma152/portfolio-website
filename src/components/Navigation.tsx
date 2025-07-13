@@ -61,8 +61,8 @@ const Navigation = () => {
         top: offsetPosition,
         behavior: 'smooth',
       });
+      setIsMenuOpen(false);
     }
-    setIsMenuOpen(false);
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -150,7 +150,7 @@ const Navigation = () => {
             {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-foreground/5 transition-colors duration-200"
+              className="p-2 rounded-lg hover:bg-foreground/5 transition-colors duration-200 text-foreground/80"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -161,7 +161,7 @@ const Navigation = () => {
               {theme === 'dark' ? (
                 <Sun className="w-5 h-5 text-yellow-300" />
               ) : (
-                <Moon className="w-5 h-5 text-foreground/80" />
+                <Moon className="w-5 h-5" />
               )}
             </motion.button>
 
@@ -190,9 +190,13 @@ const Navigation = () => {
             >
               <div className="px-2 pt-2 pb-4 space-y-1">
                 {navItems.map((item, index) => (
-                  <motion.button
+                  <motion.a
                     key={item.name}
-                    onClick={() => scrollToSection(item.href)}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    }}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.05 * index, duration: 0.2 }}
@@ -200,7 +204,7 @@ const Navigation = () => {
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     {item.name}
-                  </motion.button>
+                  </motion.a>
                 ))}
 
                 {/* Social Icons - Mobile */}
