@@ -53,8 +53,8 @@ const Contact = () => {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/anmol-sharma-8307582bb',
-      link: 'https://www.linkedin.com/in/anmol-sharma-8307582bb/',
+      value: 'linkedin.com/in/anmolsharma152',
+      link: 'https://www.linkedin.com/in/anmolsharma152/',
     },
   ];
 

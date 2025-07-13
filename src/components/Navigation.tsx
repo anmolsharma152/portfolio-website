@@ -40,7 +40,7 @@ const Navigation = () => {
     },
     {
       icon: <Linkedin size={18} />,
-      href: 'https://linkedin.com/in/anmol-sharma-8307582bb',
+      href: 'https://linkedin.com/in/anmolsharma152',
       label: 'LinkedIn',
     },
     {
