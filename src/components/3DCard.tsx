@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, useMotionTemplate, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import { Code, Cpu, Database, Zap, GitBranch, Layers } from 'lucide-react';
+import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
+import { Code, Cpu, Database, Zap, GitBranch } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 const ROTATION_RANGE = 20;
 const HALF_ROTATION_RANGE = ROTATION_RANGE / 2;
