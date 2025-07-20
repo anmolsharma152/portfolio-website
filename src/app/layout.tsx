@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
 import './globals.css';
+import { Analytics } from "@vercel/analytics/next"
 
 // Components
 import Navigation from '@/components/Navigation';
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Toaster />
           </ThemeWrapper>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

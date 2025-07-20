@@ -16,6 +16,7 @@
     "@sendgrid/mail": "^8.1.5",
     "@types/gsap": "^1.20.2",
     "@types/nodemailer": "^6.4.14",
+    "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^10.18.0",
