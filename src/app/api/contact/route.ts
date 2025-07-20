@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import * as sgMail from '@sendgrid/mail';
+import { NextResponse } from 'next/server';
 
 // Set the SendGrid API key from environment variables
 const sendgridApiKey = process.env.SENDGRID_API_KEY;

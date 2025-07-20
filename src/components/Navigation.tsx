@@ -1,11 +1,11 @@
 'use client';
 
 // Next.js and React
-import Image from 'next/image';
 
 // Third-party libraries
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 // Local imports

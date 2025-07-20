@@ -2,8 +2,8 @@
 
 import { motion, useInView, Variants } from 'framer-motion';
 import { Code, Cpu, Database, Globe, Server, Target } from 'lucide-react';
-import { useRef } from 'react';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 const About = () => {
   const ref = useRef(null);

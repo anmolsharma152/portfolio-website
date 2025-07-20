@@ -6,8 +6,9 @@ import { useInView } from 'framer-motion';
 import { Mail, Github, Linkedin, Send } from 'lucide-react';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from '@/hooks/use-toast';
 import { z } from 'zod';
+
+import { toast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
