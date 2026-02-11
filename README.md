@@ -1,6 +1,6 @@
 # Anmol Sharma - Portfolio Website
 
-A modern, interactive portfolio website built with Next.js, TypeScript, and Tailwind CSS for the Buildfolio Hackathon by Manipal University Jaipur. Showcasing projects, skills, and experience with a clean, responsive design and smooth animations.
+A modern, interactive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Showcasing projects, skills, and experience with a clean, responsive design and smooth animations.
 
 ## 🚀 Features
 
