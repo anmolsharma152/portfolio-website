@@ -2,18 +2,6 @@
 
 A modern, interactive portfolio website built with Next.js, TypeScript, and Tailwind CSS for the Buildfolio Hackathon by Manipal University Jaipur. Showcasing projects, skills, and experience with a clean, responsive design and smooth animations.
 
-## 🏆 Hackathon Submission
-
-- **Event**: Buildfolio Hackathon
-- **Organizer**: Manipal University Jaipur
-- **Submission Date**: July 20, 2025
-- **Features**:
-  - Interactive 3D card in Hero section
-  - Responsive design for all devices
-  - Contact form with SendGrid email integration
-  - Dark/Light theme support
-  - Animated UI components
-
 ## 🚀 Features
 
 - **Modern Tech Stack**: Next.js 14 + TypeScript + Tailwind CSS
@@ -323,12 +311,6 @@ To keep your portfolio at the cutting edge, consider these creative enhancements
 - Analytics dashboard for engagement tracking
 - AI/ML playground for interactive demos
 - Multilingual support (i18n)
-
-**How to Use These Ideas:**
-- Pick a few that excite you most and fit your goals
-- Sketch out the UI/UX and plan the implementation
-- Build incrementally, focusing on performance and accessibility
-- Share updates and gather feedback from users
 
 Keep innovating and let your portfolio reflect your growth as a developer and designer!
 

@@ -30,16 +30,39 @@ const Projects = () => {
     const fetchRepos = async () => {
       try {
         const response = await fetch(
-          'https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=6'
+          'https://api.github.com/users/anmolsharma152/repos?sort=updated&per_page=50'
         );
-        if (!response.ok) {
-          throw new Error('Failed to fetch repositories');
-        }
+        if (!response.ok) throw new Error('Failed to fetch repositories');
+        
         const data = await response.json();
-        // Filter out forks and sort by stars
+
+        // 1. Define your "Power Projects" in order of importance
+        const priorityOrder = [
+          'MedPal',
+          'nexus_bot',
+          'Emotion-Aware-Voice-Assistant',
+          'Home-Credit-Risk-API',
+          'CLTV-Unit-Economics-Engine',
+          'Pricing-Power-XGBoost'
+        ];
+
+        // 2. Filter, Sort by Priority first, then by stars
         const filteredRepos = data
           .filter((repo: GitHubRepo) => !repo.fork)
-          .sort((a: GitHubRepo, b: GitHubRepo) => b.stargazers_count - a.stargazers_count);
+          .sort((a: GitHubRepo, b: GitHubRepo) => {
+            const indexA = priorityOrder.indexOf(a.name);
+            const indexB = priorityOrder.indexOf(b.name);
+
+            // If both are in priority list, sort by the list order
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            // If only one is in priority list, move it to top
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+            // Otherwise, keep existing star sorting for the rest
+            return b.stargazers_count - a.stargazers_count;
+          })
+          .slice(0, 9); // Increased to 9 to show the full range
+
         setRepos(filteredRepos);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch repositories');
