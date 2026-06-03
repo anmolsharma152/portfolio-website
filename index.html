@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anmol Sharma — AI Systems Engineer</title>
+    <meta
+      name="description"
+      content="AI Systems Engineer. Agentic workflows, real-time voice pipelines, neuro-symbolic RAG. IIT Mandi DSAI."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ── RESET ─────────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      img,
+      svg {
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ── TOKENS ─────────────────────────────────────────── */
+      :root {
+        --bg: #0c0c0f;
+        --surface: #111118;
+        --surface-2: #17171f;
+        --border: #22222e;
+        --border-hover: #38384e;
+        --text: #d4d4e4;
+        --muted: #636380;
+        --faint: #32324a;
+        --accent: #d4a843;
+        --accent-dim: rgba(212, 168, 67, 0.1);
+        --accent-border: rgba(212, 168, 67, 0.22);
+        --green: #4ec97a;
+        --blue: #5898d0;
+        --purple: #9878d8;
+        --red: #d85858;
+        --mono: "JetBrains Mono", monospace;
+        --display: "Oxanium", sans-serif;
+        --body: "DM Sans", sans-serif;
+        --radius: 6px;
+        --max: 1100px;
+      }
+
+      /* ── BASE ───────────────────────────────────────────── */
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--body);
+        font-size: 16px;
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* subtle grid only visible near the top */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 47px,
+            rgba(34, 34, 52, 0.5) 47px,
+            rgba(34, 34, 52, 0.5) 48px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 47px,
+            rgba(34, 34, 52, 0.5) 47px,
+            rgba(34, 34, 52, 0.5) 48px
+          );
+        mask-image: radial-gradient(
+          ellipse 80% 55% at 50% 15%,
+          black 25%,
+          transparent 75%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 55% at 50% 15%,
+          black 25%,
+          transparent 75%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── LAYOUT ─────────────────────────────────────────── */
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      main {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── SECTION LABEL ──────────────────────────────────── */
+      .s-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+      .s-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ── SCROLL REVEAL ──────────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ── NAV ────────────────────────────────────────────── */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+        background: rgba(12, 12, 15, 0.88);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 58px;
+      }
+      .nav-logo {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .nav-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: dot-pulse 2.2s ease-in-out infinite;
+      }
+      @keyframes dot-pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.45;
+          transform: scale(0.75);
+        }
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-nav {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        padding: 5px 13px;
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .btn-nav:hover {
+        color: var(--text);
+        border-color: var(--border-hover);
+      }
+      .btn-nav svg {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 720px) {
+        .nav-links,
+        .btn-nav.hide-sm {
+          display: none;
+        }
+      }
+
+      /* ── HERO ───────────────────────────────────────────── */
+      #hero {
+        padding: 88px 0 96px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+      }
+      .hero-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--green);
+        border: 1px solid rgba(78, 201, 122, 0.2);
+        background: rgba(78, 201, 122, 0.06);
+        padding: 4px 14px;
+        border-radius: 100px;
+        margin-bottom: 26px;
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: blink 1.6s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.15;
+        }
+      }
+
+      .hero-name {
+        font-family: var(--display);
+        font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 1.08;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .hero-role {
+        font-family: var(--display);
+        font-size: clamp(1.2rem, 2.5vw, 1.85rem);
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: -0.01em;
+        margin-bottom: 22px;
+      }
+      .hero-desc {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 440px;
+        margin-bottom: 36px;
+      }
+      .hero-ctas {
+        display: flex;
+        gap: 11px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: #0c0c0f;
+        background: var(--accent);
+        padding: 10px 22px;
+        border-radius: var(--radius);
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+        display: inline-block;
+      }
+      .btn-primary:hover {
+        opacity: 0.86;
+        transform: translateY(-1px);
+      }
+      .btn-ghost {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        padding: 10px 22px;
+        border-radius: var(--radius);
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        display: inline-block;
+      }
+      .btn-ghost:hover {
+        border-color: var(--border-hover);
+        background: var(--surface-2);
+      }
+
+      /* ── TERMINAL ───────────────────────────────────────── */
+      .terminal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+      }
+      .term-bar {
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--border);
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .td {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .td.r {
+        background: #d85858;
+        opacity: 0.5;
+      }
+      .td.y {
+        background: #d4a843;
+        opacity: 0.5;
+      }
+      .td.g {
+        background: #4ec97a;
+        opacity: 0.5;
+      }
+      .term-title {
+        font-size: 0.6rem;
+        color: var(--faint);
+        margin-left: 5px;
+        letter-spacing: 0.05em;
+      }
+      .term-body {
+        padding: 18px 20px 20px;
+        line-height: 1.85;
+      }
+      .tl {
+        display: flex;
+        gap: 9px;
+        opacity: 0;
+        transform: translateY(3px);
+        animation: line-in 0.28s ease forwards;
+      }
+      
+      /* Pure CSS Terminal Status Alignment Fixes */
+      .tl-row {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .tl-col {
+        display: flex;
+        gap: 8px;
+      }
+      .t-tag {
+        width: 54px;
+        flex-shrink: 0;
+        color: var(--muted);
+      }
+      .t-cmd {
+        width: 16px;
+        flex-shrink: 0;
+      }
+
+      @keyframes line-in {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .tl:nth-child(1) { animation-delay: 0.25s; }
+      .tl:nth-child(2) { animation-delay: 0.6s; }
+      .tl:nth-child(3) { animation-delay: 1.05s; }
+      .tl:nth-child(4) { animation-delay: 1.5s; }
+      .tl:nth-child(5) { animation-delay: 1.95s; }
+      .tl:nth-child(6) { animation-delay: 2.4s; }
+      .tl:nth-child(7) { animation-delay: 2.75s; }
+      .tl:nth-child(8) { animation-delay: 3.05s; }
+      .tl:nth-child(9) { animation-delay: 3.3s; }
+      
+      .t-p { color: var(--accent); }
+      .t-c { color: var(--text); }
+      .t-d { color: var(--muted); }
+      .t-ok { color: var(--green); }
+      .t-nf { color: var(--blue); }
+      .t-er { color: var(--red); }
+      
+      .cursor {
+        display: inline-block;
+        width: 7px;
+        height: 13px;
+        background: var(--accent);
+        vertical-align: middle;
+        margin-left: 2px;
+        opacity: 0;
+        animation: cur-blink 1s step-end infinite;
+        animation-delay: 3.55s;
+      }
+      @keyframes cur-blink {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+      }
+
+      @media (max-width: 780px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .terminal {
+          font-size: 0.7rem;
+        }
+      }
+
+      /* ── UNIFIED GRID (shared by stack + projects) ──────── */
+      .board {
+        display: grid;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .board-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .board-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 720px) {
+        .board-4 { grid-template-columns: repeat(2, 1fr); }
+        .board-2 { grid-template-columns: 1fr; }
+      }
+
+      /* ── STACK ──────────────────────────────────────────── */
+      #stack {
+        padding: 80px 0;
+        border-top: 1px solid var(--border);
+      }
+      .stack-cell {
+        background: var(--surface);
+        padding: 20px;
+        transition: background 0.18s;
+      }
+      .stack-cell:hover {
+        background: var(--surface-2);
+      }
+      .stack-cat {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 9px;
+      }
+      .stack-main {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+      .stack-sub {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      /* ── PROJECTS ───────────────────────────────────────── */
+      #projects {
+        padding: 80px 0;
+        border-top: 1px solid var(--border);
+      }
+      .project-card {
+        background: var(--surface);
+        padding: 26px 28px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: background 0.18s;
+        min-height: 220px;
+      }
+      .project-card:hover {
+        background: var(--surface-2);
+      }
+      .project-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 0;
+        background: var(--accent);
+        transition: height 0.3s ease;
+        border-radius: 0;
+      }
+      .project-card:hover::before {
+        height: 100%;
+      }
+      .project-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 11px;
+      }
+      .project-name {
+        font-family: var(--display);
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.01em;
+      }
+      .p-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 5px;
+      }
+      .project-desc {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.72;
+        flex-grow: 1;
+        margin-bottom: 18px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+      .tag {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        padding: 2px 8px;
+        border-radius: 3px;
+        background: var(--accent-dim);
+        color: var(--accent);
+        border: 1px solid var(--accent-border);
+      }
+      .p-link {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--faint);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: auto;
+        transition: color 0.18s;
+      }
+      .p-link:hover {
+        color: var(--accent);
+      }
+      .p-link svg {
+        width: 11px;
+        height: 11px;
+      }
+
+      /* ── EXPERIENCE ─────────────────────────────────────── */
+      #experience {
+        padding: 80px 0;
+        border-top: 1px solid var(--border);
+      }
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 0;
+        width: 1px;
+        background: var(--border);
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 44px;
+      }
+      .tl-item:last-child {
+        margin-bottom: 0;
+      }
+      .tl-dot {
+        position: absolute;
+        left: -34px;
+        top: 5px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        border: 2px solid var(--bg);
+      }
+      .tl-dot.active {
+        background: var(--accent);
+      }
+      .tl-dot.past {
+        background: var(--border-hover);
+      }
+      .tl-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 3px;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .tl-title {
+        font-family: var(--display);
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .tl-date {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+      .tl-org {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        margin-bottom: 7px;
+      }
+      .tl-desc {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.78;
+        max-width: 600px;
+      }
+
+      /* ── CONTACT ────────────────────────────────────────── */
+      #contact {
+        padding: 80px 0;
+        border-top: 1px solid var(--border);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      .contact-hed {
+        font-family: var(--display);
+        font-size: clamp(1.5rem, 3vw, 2.1rem);
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        margin-bottom: 10px;
+      }
+      .contact-sub {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 360px;
+        margin-bottom: 24px;
+      }
+      .contact-email {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--accent);
+        transition: opacity 0.18s;
+        word-break: break-all;
+      }
+      .contact-email:hover {
+        opacity: 0.72;
+      }
+      /* simple contact form */
+      .cform {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .cform input,
+      .cform textarea {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 10px 14px;
+        font-family: var(--body);
+        font-size: 0.82rem;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.18s;
+        resize: none;
+      }
+      .cform input::placeholder,
+      .cform textarea::placeholder {
+        color: var(--faint);
+      }
+      .cform input:focus,
+      .cform textarea:focus {
+        border-color: var(--border-hover);
+      }
+      .cform textarea {
+        min-height: 110px;
+      }
+      .cform button {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: #0c0c0f;
+        background: var(--accent);
+        border: none;
+        padding: 11px 24px;
+        border-radius: var(--radius);
+        cursor: pointer;
+        align-self: flex-start;
+        transition:
+          opacity 0.18s,
+          transform 0.18s;
+      }
+      .cform button:hover {
+        opacity: 0.86;
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 720px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+      }
+
+      /* ── FOOTER ─────────────────────────────────────────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 28px 0;
+        position: relative;
+        z-index: 1;
+      }
+      .foot-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .foot-copy {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--faint);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .foot-links {
+        display: flex;
+        gap: 18px;
+      }
+      .foot-links a {
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        transition: color 0.18s;
+      }
+      .foot-links a:hover {
+        color: var(--text);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="wrap">
+        <div class="nav-inner">
+          <a href="#" class="nav-logo">
+            <span class="nav-dot"></span>
+            anmol.sharma
+          </a>
+
+          <ul class="nav-links">
+            <li><a href="#hero">Overview</a></li>
+            <li><a href="#stack">Stack</a></li>
+            <li><a href="#projects">Systems</a></li>
+            <li><a href="#experience">Timeline</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <div class="nav-right">
+            <a href="#" class="btn-nav hide-sm">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+                />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              Resume
+            </a>
+            <a
+              href="https://github.com/anmolsharma152"
+              target="_blank"
+              rel="noopener"
+              class="btn-nav"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.82-.257.82-.572 0-.28-.01-1.017-.014-2.002-3.337.724-4.04-1.608-4.04-1.608-.546-1.385-1.334-1.75-1.334-1.75-1.087-.745.082-.73.082-.73 1.205.085 1.838 1.24 1.838 1.24 1.07 1.833 2.81 1.304 3.49.997.108-.775.42-1.304.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.467-2.383 1.235-3.22-.12-.3-.535-1.52.117-3.176 0 0 1.008-.322 3.301 1.233.957-.266 1.983-.4 3.003-.404 1.02.004 2.046.138 3.003.404 2.293-1.555 3.3-1.233 3.3-1.233.652 1.656.237 2.876.117 3.176.77.837 1.233 1.91 1.233 3.22 0 4.61-2.805 5.626-5.477 5.92-.42.36-.803 1.094-.803 2.21 0 1.603-.014 2.894-.014 3.284 0 .317.218.687.825.57A12 12 0 0024 12C24 5.373 18.627 0 12 0z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section id="hero">
+        <div class="wrap">
+          <div class="hero-grid">
+            <div>
+              <div class="hero-status">
+                <span class="status-dot"></span>
+                Open to Work
+              </div>
+              <h1 class="hero-name">Anmol Sharma</h1>
+
+              <p class="hero-role">AI Systems Engineer</p>
+
+              <p class="hero-desc">
+                DSAI student at IIT Mandi building production-grade AI on
+                constrained hardware. Focused on agentic pipelines, real-time
+                voice systems, neuro-symbolic RAG, and optimizing edge inference
+                where compute efficiency is a priority.
+              </p>
+              <div class="hero-ctas">
+                <a href="#projects" class="btn-primary">View Systems</a>
+                <a href="#contact" class="btn-ghost">Initialize Contact</a>
+              </div>
+            </div>
+
+            <div class="terminal">
+              <div class="term-bar">
+                <span class="td r"></span>
+                <span class="td y"></span>
+                <span class="td g"></span>
+                <span class="term-title">DellDroid — fish — ~/projects</span>
+              </div>
+              <div class="term-body">
+                
+                <div class="tl">
+                  <span class="t-p t-cmd">❯</span>
+                  <span class="t-c">python run_agent.py --mode inference</span>
+                </div>
+                
+                <div class="tl tl-row">
+                  <div class="tl-col">
+                    <span class="t-tag">[INIT]</span>
+                    <span>Loading Llama 3.3 via Groq API</span>
+                  </div>
+                  <span class="t-ok">✓</span>
+                </div>
+                
+                <div class="tl tl-row">
+                  <div class="tl-col">
+                    <span class="t-tag">[GRAPH]</span>
+                    <span>Building LangGraph state machine</span>
+                  </div>
+                  <span class="t-ok">✓</span>
+                </div>
+                
+                <div class="tl tl-row">
+                  <div class="tl-col">
+                    <span class="t-tag">[RAG]</span>
+                    <span>Indexing 2,847 vecs — FAISS flat L2</span>
+                  </div>
+                  <span class="t-ok">✓</span>
+                </div>
+                
+                <div class="tl tl-row">
+                  <div class="tl-col">
+                    <span class="t-tag">[VAD]</span>
+                    <span>Silero ONNX Runtime — CPU-only</span>
+                  </div>
+                  <span class="t-ok">✓</span>
+                </div>
+                
+                <div class="tl tl-row">
+                  <div class="tl-col">
+                    <span class="t-tag">[MCP]</span>
+                    <span>Tool registry: 7 tools registered</span>
+                  </div>
+                  <span class="t-ok">✓</span>
+                </div>
+                
+                <div class="tl">&nbsp;</div>
+                
+                <div class="tl">
+                  <span class="t-nf t-cmd">◆</span>
+                  <span>Pipeline ready. Awaiting input<span class="cursor"></span></span>
+                </div>
+                
+              </div>
+            </div>
+            </div> 
+        </div>
+      </section>
+
+      <section id="stack">
+        <div class="wrap">
+          <div class="s-label reveal">Core Architecture</div>
+          <div class="board board-4 reveal">
+            <div class="stack-cell">
+              <div class="stack-cat">Languages</div>
+              <div class="stack-main">Python · TypeScript</div>
+              <div class="stack-sub">Rust · SQL · Bash</div>
+            </div>
+            <div class="stack-cell">
+              <div class="stack-cat">AI / ML</div>
+              <div class="stack-main">PyTorch · LangGraph</div>
+              <div class="stack-sub">TensorFlow · ONNX · OpenCV</div>
+            </div>
+            <div class="stack-cell">
+              <div class="stack-cat">Data & Infra</div>
+              <div class="stack-main">PostgreSQL · FAISS</div>
+              <div class="stack-sub">Docker · AWS · Groq API</div>
+            </div>
+            <div class="stack-cell">
+              <div class="stack-cat">Systems / Dev</div>
+              <div class="stack-main">Arch Linux · Neovim</div>
+              <div class="stack-sub">Tmux · Fish · uv</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="wrap">
+          <div class="s-label reveal">Engineered Systems</div>
+
+          <div class="board board-2 reveal">
+            <div class="project-card">
+              <div class="project-head">
+                <h3 class="project-name">CodexEngine</h3>
+                <div class="p-dot" style="background: var(--blue)"></div>
+              </div>
+              <p class="project-desc">
+                A high-performance Retrieval-Augmented Generation (RAG) pipeline.
+                Built the ingestion and vectorization mechanics to handle dense
+                document retrieval, optimizing semantic chunking strategies and
+                embedding models for high-fidelity context grounding.
+              </p>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Vector Retrieval</span>
+                <span class="tag">LLM Orchestration</span>
+              </div>
+              <a href="https://github.com/anmolsharma152" target="_blank" class="p-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                View Repository
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="project-head">
+                <h3 class="project-name">PsyRAG</h3>
+                <div class="p-dot" style="background: var(--purple)"></div>
+              </div>
+              <p class="project-desc">
+                A domain-adapted knowledge retrieval system tailored for
+                psychological and behavioral data. Implemented targeted semantic
+                search techniques to ensure high-precision context injection and
+                safeguard constraints for sensitive language modeling.
+              </p>
+              <div class="tags">
+                <span class="tag">Domain Adaptation</span>
+                <span class="tag">Semantic Search</span>
+                <span class="tag">Data Science</span>
+              </div>
+              <a href="https://github.com/anmolsharma152" target="_blank" class="p-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                View Repository
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="project-head">
+                <h3 class="project-name">Deep RL Policy Optimization</h3>
+                <div class="p-dot" style="background: var(--green)"></div>
+              </div>
+              <p class="project-desc">
+                Developed custom Reinforcement Learning environments and policy
+                networks. Implemented baseline RL algorithms (including A2C/PPO
+                architectures) to optimize agent decision-making within dynamic
+                state spaces, actively managing exploration-exploitation
+                trade-offs.
+              </p>
+              <div class="tags">
+                <span class="tag">Reinforcement Learning</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">Policy Optimization</span>
+              </div>
+              <a href="https://github.com/anmolsharma152" target="_blank" class="p-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                View Repository
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="project-head">
+                <h3 class="project-name">Automated CV Pipeline</h3>
+                <div class="p-dot" style="background: var(--accent)"></div>
+              </div>
+              <p class="project-desc">
+                Built asynchronous data acquisition pipelines utilizing Playwright
+                for headless browser automation to structure large-scale training
+                datasets. Integrated real-time computer vision models (OpenCV) for
+                spatial feature extraction and localized emotion recognition.
+              </p>
+              <div class="tags">
+                <span class="tag">Playwright</span>
+                <span class="tag">Computer Vision</span>
+                <span class="tag">OpenCV</span>
+              </div>
+              <a href="https://github.com/anmolsharma152" target="_blank" class="p-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                View Repository
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="wrap">
+          <div class="s-label reveal">Experience Log</div>
+          <div class="timeline reveal">
+            <div class="tl-item">
+              <div class="tl-dot active"></div>
+              <div class="tl-meta">
+                <span class="tl-title">Independent AI/ML Engineer</span>
+                <span class="tl-date">2024 — Present</span>
+              </div>
+              <div class="tl-desc">
+                Building production-grade AI systems end-to-end: dual-RAG
+                clinical support, real-time voice pipelines, and agentic
+                workflow engines. CPU-only inference on a resource-constrained
+                laptop as a deliberate first-class design constraint.
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot past"></div>
+              <div class="tl-meta">
+                <span class="tl-title">B.Tech — Data Science & AI</span>
+                <span class="tl-date">2023 — Present</span>
+              </div>
+              <div class="tl-org">IIT Mandi · Deep Learning Minor (CCE)</div>
+              <div class="tl-desc">
+                DSAI programme with a Deep Learning minor through IIT Mandi CCE.
+                Coursework covers GANs, VAEs, Reinforcement Learning, NLP, and
+                applied agentic systems.
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot past"></div>
+              <div class="tl-meta">
+                <span class="tl-title">Technical Support Executive</span>
+                <span class="tl-date">2023 — 2024</span>
+              </div>
+              <div class="tl-org">Teleperformance</div>
+              <div class="tl-desc">
+                Enterprise support infrastructure for Japanese clients. Resolved
+                complex networking and integration issues under strict SLA
+                compliance in high-pressure environments.
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot past"></div>
+              <div class="tl-meta">
+                <span class="tl-title">Freelance Developer</span>
+                <span class="tl-date">2022 — 2024</span>
+              </div>
+              <div class="tl-desc">
+                Modular CLI utilities and Python backends. Mentored developers
+                on Linux environment optimisation, Neovim configuration, and
+                terminal-centric productivity workflows.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap">
+          <div class="s-label reveal">Get In Touch</div>
+          <div class="contact-grid reveal">
+            <div>
+              <h2 class="contact-hed">
+                Let's engineer intelligent infrastructure.
+              </h2>
+              <p class="contact-sub">
+                Available for production AI/ML engineering roles. Strong fit for
+                teams building real-time inference systems, agentic frameworks,
+                or LLM-backed products.
+              </p>
+              <a href="mailto:ozymandias.work@gmail.com" class="contact-email">
+                ozymandias.work@gmail.com
+              </a>
+            </div>
+
+            <form
+              class="cform"
+              action="mailto:ozymandias.work@gmail.com"
+              method="GET"
+              enctype="text/plain"
+            >
+              <input type="text" name="name" placeholder="Name" required />
+              <input type="email" name="email" placeholder="Email" required />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+              />
+              <textarea name="body" placeholder="Message" required></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      
+      <div class="wrap">
+        <div class="foot-inner">
+          <span class="foot-copy"
+            >© 2026 Anmol Sharma // Engineered in Jaipur // Arch Linux</span
+          >
+          <div class="foot-links">
+            
+            <a href="https://github.com/anmolsharma152" target="_blank" rel="noopener">GitHub</a>
+            
+            <a href="https://linkedin.com/in/anmolsharma152" target="_blank" rel="noopener">LinkedIn</a>
+
+            <!-- Optional: You can add a link to your PDF resume here later -->
+
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -36px 0px" },
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+    </script>
+  </body>
+</html>
