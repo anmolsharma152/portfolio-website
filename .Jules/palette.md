@@ -1,0 +1,3 @@
+## 2026-06-04 - Form Labeling and Global Focus Accessibility
+**Learning:** Found that the contact form relied entirely on placeholders without explicit labels, creating an accessibility barrier for screen readers. Also, default focus states for keyboard navigation were invisible against the dark theme.
+**Action:** Implemented `aria-label` attributes for form inputs where visual labels would disrupt the minimalist design. Added a global `*:focus-visible` rule utilizing the existing `--accent` CSS variable to ensure high-contrast, keyboard-navigable focus states across the entire application.
