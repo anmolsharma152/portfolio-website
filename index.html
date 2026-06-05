@@ -72,6 +72,12 @@
         -webkit-font-smoothing: antialiased;
       }
 
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
       /* subtle grid only visible near the top */
       body::before {
         content: "";
@@ -1174,15 +1180,16 @@
               method="GET"
               enctype="text/plain"
             >
-              <input type="text" name="name" placeholder="Name" required />
-              <input type="email" name="email" placeholder="Email" required />
+              <input type="text" name="name" placeholder="Name" aria-label="Name" required />
+              <input type="email" name="email" placeholder="Email" aria-label="Email" required />
               <input
                 type="text"
                 name="subject"
                 placeholder="Subject"
+                aria-label="Subject"
                 required
               />
-              <textarea name="body" placeholder="Message" required></textarea>
+              <textarea name="body" placeholder="Message" aria-label="Message" required></textarea>
               <button type="submit">Send Message</button>
             </form>
           </div>
