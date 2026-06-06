@@ -1,0 +1,3 @@
+## 2024-05-18 - Missing Labels on Placeholder-Only Forms
+**Learning:** Forms that use placeholders without explicit `<label>` elements are a common accessibility issue, as screen readers cannot interpret the input fields properly.
+**Action:** Always add `aria-label` or `aria-labelledby` to `<input>` and `<textarea>` elements when visible `<label>` tags are missing to ensure semantic clarity for screen readers.
