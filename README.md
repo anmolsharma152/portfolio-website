@@ -4,16 +4,16 @@ A zero-dependency, ultra-lightweight static architecture representing the profes
 
 ## Architecture
 
-* **Frontend:** Pure HTML5 & Vanilla CSS3 (Zero frameworks, zero build steps)
-* **Design Pattern:** Terminal-native aesthetic, pure Flexbox/CSS Grid, no client-side JavaScript.
-* **Deployment:** CI/CD via GitHub hooked directly to Vercel's edge network for sub-second static asset delivery.
+- **Frontend:** Pure HTML5 & Vanilla CSS3 (Zero frameworks, zero build steps)
+- **Design Pattern:** Terminal-native aesthetic, pure Flexbox/CSS Grid, no client-side JavaScript.
+- **Deployment:** CI/CD via GitHub hooked directly to Vercel's edge network for sub-second static asset delivery.
 
 ## Engineering Rationale
 
 This repository was intentionally migrated away from heavy JavaScript frameworks (Next.js/React) to a pure static architecture. This eliminates dependency debt (`node_modules`), removes build-time vulnerabilities, and perfectly aligns with a systems engineering philosophy: **use the most efficient, lowest-latency tool for the job.**
 
-> **Live Deployment:** [anmolsharma152.vercel.app](https://anmolsharma152.vercel.app/)
+> **Live Deployment:** [anmolsharma152.github.io](https://anmolsharma152.github.io/)
 
 Built with ❤️ by Anmol Sharma
 
-*Last updated: June 2026*
+_Last updated: June 2026_
